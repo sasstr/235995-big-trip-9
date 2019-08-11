@@ -15,9 +15,9 @@ const getCardTasks = (cardCount) => new Array(cardCount).fill().map(getCard).joi
 
 /**
  * Функция рендерит разметку.
- * @param {string} place место куда вставлять разметку.
  * @param {node} container элемент в который добавляется разметка из cb.
  * @param {string} markup функция которая возращает разметку, которая добавляется в container.
+ * @param {string} place место куда вставлять разметку.
  * @return {void}
  */
 const renderComponent = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);
