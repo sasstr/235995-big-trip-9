@@ -1,4 +1,4 @@
-const getfilters = () => `
+const getFilters = () => `
   <h2 class="visually-hidden">Filter events</h2>
   <form class="trip-filters" action="#" method="get">
     <div class="trip-filters__filter">
@@ -51,5 +51,5 @@ const getSortForm = () => `
   <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
   </form>`;
 
-export {getfilters};
+export {getFilters};
 export {getSortForm};

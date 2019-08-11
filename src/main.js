@@ -2,7 +2,7 @@ import {getMenu} from './components/menu';
 import {getFilters} from './components/filters';
 import {getSortForm} from './components/filters';
 import {getCard} from './components/card';
-import {getEditCard} from './components/card-edit';
+import {getEditCard} from './components/edit-event';
 import {getRouteInformation} from './components/route-information';
 
 const CARD_COUNT = 3;
@@ -20,13 +20,16 @@ const getCardTasks = (cardCount) => new Array(cardCount).fill().map(getCard).joi
  * @param {string} markup функция которая возращает разметку, которая добавляется в container.
  * @return {void}
  */
-const renderComponent = (place, container, markup) => container.insertAdjacentHTML(place, markup);
+const renderComponent = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);
 
 const tripInfo = document.querySelector(`.trip-info`);
-const tripControl = tripInfo.querySelector(`.trip-controls`);
-const tripEvents = document.querySelector(`.trip-events`);
+renderComponent(tripInfo, getRouteInformation(), `afterBegin`);
 
-/* renderComponent(mainControl, getMenu());
-renderComponent(pageMain, getSearch());
-renderComponent(pageMain, getMainFilter());
-renderComponent(pageMain, getBoardContainer()); */
+const tripControl = document.querySelector(`.trip-controls`);
+renderComponent(tripControl, getMenu());
+renderComponent(tripControl, getFilters());
+
+const tripEvents = document.querySelector(`.trip-events`);
+renderComponent(tripEvents, getSortForm());
+renderComponent(tripEvents, getEditCard());
+renderComponent(tripEvents, getCardTasks(CARD_COUNT));
