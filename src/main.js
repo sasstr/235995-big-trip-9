@@ -1,8 +1,7 @@
 import {getMenu} from './components/menu';
 import {getFilters} from './components/filters';
-import {getSortForm} from './components/filters';
+import {getSortForm} from './components/sort';
 import {getCard} from './components/card';
-import {getEditCard} from './components/edit-event';
 import {getRouteInformation} from './components/route-information';
 
 const CARD_COUNT = 3;
@@ -31,5 +30,4 @@ renderComponent(tripControl, getFilters());
 
 const tripEvents = document.querySelector(`.trip-events`);
 renderComponent(tripEvents, getSortForm());
-renderComponent(tripEvents, getEditCard());
 renderComponent(tripEvents, getCardTasks(CARD_COUNT));
