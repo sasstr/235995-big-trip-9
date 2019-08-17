@@ -82,11 +82,6 @@ const getEventMockData = () => ({
       isActive: Boolean(Math.round(Math.random())),
     },
     {
-      offerTitle: `Switch to comfort + € `,
-      offerPrice: Math.round(Math.random * 10),
-      isActive: Boolean(Math.round(Math.random())),
-    },
-    {
       offerTitle: `Rent a car + € `,
       offerPrice: Math.round(Math.random * 50),
       isActive: Boolean(Math.round(Math.random())),
