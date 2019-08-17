@@ -1,8 +1,8 @@
-import {getMenu} from './components/menu';
-import {getFilters} from './components/filters';
-import {getSortForm} from './components/sort';
-import {getCard} from './components/card';
-import {getRouteInformation} from './components/route-information';
+import {makeMenuTemplate} from './components/menu';
+import {makeFiltersTemplate} from './components/filters';
+import {makeSortFormTemplate} from './components/sort';
+import {makeEventTemplate} from './components/event-item';
+import {makeRouteInformationTemplate} from './components/route-information';
 
 const CARD_COUNT = 3;
 /**
@@ -10,7 +10,7 @@ const CARD_COUNT = 3;
  * @param {number} cardCount колличество карточек задач.
  * @return {string}
  */
-const getCardTasks = (cardCount) => new Array(cardCount).fill().map(getCard).join(``);
+const createEventsMock = (cardCount) => new Array(cardCount).fill().map(makeEventTemplate).join(``);
 
 /**
  * Функция рендерит разметку.
@@ -19,15 +19,15 @@ const getCardTasks = (cardCount) => new Array(cardCount).fill().map(getCard).joi
  * @param {string} place место куда вставлять разметку.
  * @return {void}
  */
-const renderComponent = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);
+const renderTemplate = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);
 
 const tripInfo = document.querySelector(`.trip-info`);
-renderComponent(tripInfo, getRouteInformation(), `afterBegin`);
+renderTemplate(tripInfo, makeRouteInformationTemplate(), `afterBegin`);
 
 const tripControl = document.querySelector(`.trip-controls`);
-renderComponent(tripControl, getMenu());
-renderComponent(tripControl, getFilters());
+renderTemplate(tripControl, makeMenuTemplate());
+renderTemplate(tripControl, makeFiltersTemplate());
 
 const tripEvents = document.querySelector(`.trip-events`);
-renderComponent(tripEvents, getSortForm());
-renderComponent(tripEvents, getCardTasks(CARD_COUNT));
+renderTemplate(tripEvents, makeSortFormTemplate());
+renderTemplate(tripEvents, createEventsMock(CARD_COUNT));

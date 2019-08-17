@@ -33,7 +33,7 @@ const getEventItem = () => `<div class="event">
   </button>
 </div>`;
 
-const getCard = (it, index) => `<li class="trip-days__item  day">
+const makeEventTemplate = (it, index) => `<li class="trip-days__item  day">
   <div class="day__info">
     <span class="day__counter">1</span>
     <time class="day__date" datetime="2019-03-18">MAR 18</time>
@@ -54,5 +54,5 @@ const getCard = (it, index) => `<li class="trip-days__item  day">
   </ul>
 </li>`;
 
-export {getCard};
+export {makeEventTemplate};
 export {getEventItem};
