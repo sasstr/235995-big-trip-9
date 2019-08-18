@@ -16,6 +16,6 @@ const makeFiltersTemplate = () => `<h2 class="visually-hidden">Filter events</h2
     </div>
 
     <button class="visually-hidden" type="submit">Accept filter</button>
-  </form>`;
+  </form>`.trim();
 
 export {makeFiltersTemplate};

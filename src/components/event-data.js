@@ -1,9 +1,24 @@
+import {randomNumder} from './util';
+import {randomOptionInteger} from './util';
+
 const Unit = {
   week: 7,
   day: 24,
   hour: 60,
   minute: 60,
   second: 1000
+};
+
+const optionFactor = {
+  luggage: 10,
+  switchToComfort: 15,
+  choosSeats: 3,
+  addMeal: 2,
+  rentCar: 50,
+  addBreakfast: 10,
+  bookTickets: 5,
+  lunchInCity: 10,
+  orderUber: 3,
 };
 
 const getEventMockData = () => ({
@@ -63,48 +78,48 @@ const getEventMockData = () => ({
   eventOffer: [
     {
       offerTitle: `Add luggage + € `,
-      offerPrice: Math.round(Math.random * 10),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.luggage),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Switch to comfort class  + € `,
-      offerPrice: Math.round(Math.random * 15),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.switchToComfort),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Choose seats + € `,
-      offerPrice: Math.round(Math.random * 3),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.choosSeats),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Add meal €`,
-      offerPrice: Math.round(Math.random * 2),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.addMeal),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Rent a car + € `,
-      offerPrice: Math.round(Math.random * 50),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.rentCar),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Add breakfast + € `,
-      offerPrice: Math.round(Math.random * 10),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.addBreakfast),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Book tickets + € `,
-      offerPrice: Math.round(Math.random * 5),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.bookTickets),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Lunch in city + € `,
-      offerPrice: Math.round(Math.random * 10),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.lunchInCity),
+      isActive: randomNumder(),
     },
     {
       offerTitle: `Order Uber + € `,
-      offerPrice: Math.round(Math.random * 3),
-      isActive: Boolean(Math.round(Math.random())),
+      offerPrice: randomOptionInteger(optionFactor.orderUber),
+      isActive: randomNumder(),
     }
   ],
   offerDescription: [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -52,7 +52,7 @@ const makeEventTemplate = (it, index) => `<li class="trip-days__item  day">
       ${getEventItem()}
     </li>
   </ul>
-</li>`;
+</li>`.trim();
 
 export {makeEventTemplate};
 export {getEventItem};

@@ -27,6 +27,6 @@ const makeSortFormTemplate = () => `<form class="trip-events__trip-sort  trip-so
   </div>
 
   <span class="trip-sort__item  trip-sort__item--offers">Offers</span>
-  </form>`;
+  </form>`.trim();
 
 export {makeSortFormTemplate};

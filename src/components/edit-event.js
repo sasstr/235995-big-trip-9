@@ -184,6 +184,6 @@ const getEditCard = () => `<form class="event  event--edit" action="#" method="p
       </div>
     </section>
   </section>
-</form>`;
+</form>`.trim();
 
 export {getEditCard};
