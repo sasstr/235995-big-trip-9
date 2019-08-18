@@ -1,5 +1,14 @@
-const MIN_TAGS_AMOUNT = 0;
-const MAX_TAGS_AMOUNT = 2;
+const MIN_OFFER_AMOUNT = 0;
+const MAX_OFFER_AMOUNT = 2;
+
+/** Функция возращает случайный элемент массива
+ *
+ * @param {array} array массив
+ * @return {mix} случайный элемент массива
+ */
+const getRendomItemOfArray = (array) => {
+  return array[getRandomInteger(0, array.length)];
+};
 
 /** Функция возращает случайное логическое значение true или false.
  *  @return {boolean} логическое значение true или false.
@@ -25,8 +34,8 @@ const randomOptionInteger = (factor) => Math.round(Math.random * factor);
  *  @param {array} array
  *  @return {array} возращает массив тегов длины от 0 до 2
  */
-const getTagsArray = (array) => {
-  return array.slice(MIN_TAGS_AMOUNT, getRandomInteger(MIN_TAGS_AMOUNT, MAX_TAGS_AMOUNT));
+const getOfferArray = (array) => {
+  return array.slice(MIN_OFFER_AMOUNT, getRandomInteger(MIN_OFFER_AMOUNT, MAX_OFFER_AMOUNT));
 };
 
 /** Функция перемешивает элементы массива
@@ -46,7 +55,8 @@ const shuffleElemetsOfArray = (array) => {
   return cloneArray;
 };
 
-export {getTagsArray};
+export {getOfferArray};
 export {shuffleElemetsOfArray};
 export {randomNumder};
 export {randomOptionInteger};
+export {getRendomItemOfArray};

@@ -1,3 +1,4 @@
+import {createEventMockData} from './components/event-data';
 import {makeMenuTemplate} from './components/menu';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
