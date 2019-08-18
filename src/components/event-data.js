@@ -25,55 +25,66 @@ const optionFactor = {
 };
 
 const createEventMockData = () => ({
-  eventType: {
-    bus: {
+  eventType: new Set([
+    {
+      name: `bus`,
       title: `Bus to Geneva`,
       icon: `bus.png`
     },
-    checkIn: {
+    {
+      name: `checkIn`,
       title: `Check into hotel`,
       icon: `check-in.png`
     },
-    driveTo: {
+    {
+      name: `drive`,
       title: `Drive to Los Angeles`,
       icon: `drive.png`
     },
-    flightTo: {
+    {
+      name: `flight`,
       title: `Flight to Moscow`,
       icon: `flight.png`
     },
-    restaurant: {
+    {
+      name: `restaurant`,
       title: `Go to restaurant `,
       icon: `restaurant.png`
     },
-    ship: {
+    {
+      name: `ship`,
       title: `Ship to London`,
       icon: `ship.png`
     },
-    sightseeing: {
+    {
+      name: `sightseeing`,
       title: `Go sightseeing at `,
       icon: `sightseeing.png`
     },
-    taxi: {
-      title: `Taxi to Delhi`,
+    {
+      name: `taxi`,
+      title: `Taxi to Airport`,
       icon: `taxi.png`
     },
-    train: {
+    {
+      name: `train`,
       title: `Train to New York`,
       icon: `train.png`
     },
-    transport: {
+    {
+      name: `transport`,
       title: `transport to Los Angeles`,
       icon: `transport.png`
     },
-    trip: {
+    {
+      name: `trip`,
       title: `trip to Saint Peterburg`,
       icon: `trip.png`
     },
-  },
+  ]),
   eventTime: {
-    startTime: Date.now() + 1 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
-    endTime: Date.now() + 2 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
+    start: Date.now() + 1 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
+    end: Date.now() + 2 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
     get duration() {
       return this.endTime - this.startTime;
     },
