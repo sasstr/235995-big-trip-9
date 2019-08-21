@@ -13,7 +13,7 @@ const getRendomItemOfArray = (array) => {
 /** Функция возращает случайное логическое значение true или false.
  *  @return {boolean} логическое значение true или false.
  */
-const randomNumder = () => Boolean(Math.round(Math.random()));
+const randomBoolean = () => Boolean(Math.round(Math.random()));
 
 /** Функция возращает случайное целое число между min и max - включительно
  *  @param {number} min минимальное значение целое число.
@@ -57,6 +57,6 @@ const shuffleElemetsOfArray = (array) => {
 
 export {getOfferArray};
 export {shuffleElemetsOfArray};
-export {randomNumder};
+export {randomBoolean};
 export {randomOptionInteger};
 export {getRendomItemOfArray};

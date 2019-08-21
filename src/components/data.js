@@ -1,4 +1,4 @@
-import {randomNumder,
+import {randomBoolean,
   randomOptionInteger,
   getOfferArray,
   shuffleElemetsOfArray,
@@ -94,47 +94,47 @@ const createEventMockData = () => ({
     {
       title: `Add luggage + € `,
       price: randomOptionInteger(optionFactor.luggage),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Switch to comfort class  + € `,
       price: randomOptionInteger(optionFactor.switchToComfort),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Choose seats + € `,
       price: randomOptionInteger(optionFactor.chooseSeats),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Add meal €`,
       price: randomOptionInteger(optionFactor.addMeal),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Rent a car + € `,
       price: randomOptionInteger(optionFactor.rentCar),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Add breakfast + € `,
       price: randomOptionInteger(optionFactor.addBreakfast),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Book tickets + € `,
       price: randomOptionInteger(optionFactor.bookTickets),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Lunch in city + € `,
       price: randomOptionInteger(optionFactor.lunchInCity),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     },
     {
       title: `Order Uber + € `,
       price: randomOptionInteger(optionFactor.orderUber),
-      isActive: randomNumder(),
+      isActive: randomBoolean(),
     }
   ],
   get offerList() {
@@ -179,7 +179,7 @@ const createEventMockData = () => ({
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
   ],
-  isFavorite: randomNumder(),
+  isFavorite: randomBoolean(),
 });
 
 export {createEventMockData};
