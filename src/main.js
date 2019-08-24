@@ -1,4 +1,3 @@
-import {createEventMockData} from './components/data';
 import {makeMenuTemplate} from './components/menu';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
@@ -17,7 +16,7 @@ const createEventsMock = (cardCount) => new Array(cardCount).fill().map(makeEven
  * Функция рендерит разметку.
  * @param {node} container элемент в который добавляется разметка из cb.
  * @param {string} markup функция которая возращает разметку, которая добавляется в container.
- * @param {string} place место куда вставлять разметку.
+ * @param {string} place место куда вставлять разметку.`
  * @return {void}
  */
 const renderTemplate = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);

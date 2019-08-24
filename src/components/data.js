@@ -1,8 +1,13 @@
 import {randomBoolean,
-  randomOptionInteger,
+  getRandomInteger,
   getOfferArray,
   shuffleElemetsOfArray,
   getRendomItemOfArray} from './util';
+
+const PRICE_RANGE = {
+  max: 5,
+  min: 250,
+};
 
 const Unit = {
   week: 7,
@@ -12,149 +17,102 @@ const Unit = {
   second: 1000
 };
 
-const optionFactor = {
-  luggage: 10,
-  switchToComfort: 15,
-  chooseSeats: 3,
-  addMeal: 2,
-  rentCar: 50,
-  addBreakfast: 10,
-  bookTickets: 5,
-  lunchInCity: 10,
-  orderUber: 3,
-};
+const getEventOfferOption = () => [
+  `Add luggage + € `,
+  `Switch to comfort class  + € `,
+  `Choose seats + € `,
+  `Add meal € `,
+  `Rent a car + € `,
+  `Add breakfast + € `,
+  `Book tickets + € `,
+  `Lunch in city + € `,
+  `Order Uber + € `,
+][Math.floor(Math.random() * 9)];
+
+const eventList = [
+  {
+    title: `Bus to Geneva`,
+    icon: `bus.png`
+  },
+  {
+    title: `Check into hotel`,
+    icon: `check-in.png`
+  },
+  {
+    title: `Drive to Los Angeles`,
+    icon: `drive.png`
+  },
+  {
+    title: `Flight to Moscow`,
+    icon: `flight.png`
+  },
+  {
+    title: `Go to restaurant `,
+    icon: `restaurant.png`
+  },
+  {
+    title: `Ship to London`,
+    icon: `ship.png`
+  },
+  {
+    title: `Go sightseeing at `,
+    icon: `sightseeing.png`
+  },
+  {
+    title: `Taxi to Airport`,
+    icon: `taxi.png`
+  },
+  {
+    title: `Train to New York`,
+    icon: `train.png`
+  },
+  {
+    title: `transport to Los Angeles`,
+    icon: `transport.png`
+  },
+  {
+    title: `trip to Saint Peterburg`,
+    icon: `trip.png`
+  },
+];
+
+const offerDescription = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+  `Cras aliquet varius magna, non porta ligula feugiat eget.`,
+  `Fusce tristique felis   at fermentum pharetra.`,
+  `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
+  `In rutrum ac purus sit amet tempus.`,
+  `Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
+  `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
+  `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
+  `Sed sed nisi sed augue convallis suscipit in sed felis.`
+];
+
+const eventType = getRendomItemOfArray(eventList);
+const eventPrice = getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max);
 
 const createEventMockData = () => ({
-  eventType: new Set([
-    {
-      name: `bus`,
-      title: `Bus to Geneva`,
-      icon: `bus.png`
-    },
-    {
-      name: `checkIn`,
-      title: `Check into hotel`,
-      icon: `check-in.png`
-    },
-    {
-      name: `drive`,
-      title: `Drive to Los Angeles`,
-      icon: `drive.png`
-    },
-    {
-      name: `flight`,
-      title: `Flight to Moscow`,
-      icon: `flight.png`
-    },
-    {
-      name: `restaurant`,
-      title: `Go to restaurant `,
-      icon: `restaurant.png`
-    },
-    {
-      name: `ship`,
-      title: `Ship to London`,
-      icon: `ship.png`
-    },
-    {
-      name: `sightseeing`,
-      title: `Go sightseeing at `,
-      icon: `sightseeing.png`
-    },
-    {
-      name: `taxi`,
-      title: `Taxi to Airport`,
-      icon: `taxi.png`
-    },
-    {
-      name: `train`,
-      title: `Train to New York`,
-      icon: `train.png`
-    },
-    {
-      name: `transport`,
-      title: `transport to Los Angeles`,
-      icon: `transport.png`
-    },
-    {
-      name: `trip`,
-      title: `trip to Saint Peterburg`,
-      icon: `trip.png`
-    },
-  ]),
+  eventTypeIcon: eventType.title,
+  eventTypeTitle: eventType.icon,
   eventTime: {
     start: Date.now() + 1 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
     end: Date.now() + 2 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
     get duration() {
       return this.endTime - this.startTime;
-    },
-  },
-  eventPrice: randomOptionInteger(optionFactor.luggage),
-  eventOffer: [
-    {
-      title: `Add luggage + € `,
-      price: randomOptionInteger(optionFactor.luggage),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Switch to comfort class  + € `,
-      price: randomOptionInteger(optionFactor.switchToComfort),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Choose seats + € `,
-      price: randomOptionInteger(optionFactor.chooseSeats),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Add meal €`,
-      price: randomOptionInteger(optionFactor.addMeal),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Rent a car + € `,
-      price: randomOptionInteger(optionFactor.rentCar),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Add breakfast + € `,
-      price: randomOptionInteger(optionFactor.addBreakfast),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Book tickets + € `,
-      price: randomOptionInteger(optionFactor.bookTickets),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Lunch in city + € `,
-      price: randomOptionInteger(optionFactor.lunchInCity),
-      isActive: randomBoolean(),
-    },
-    {
-      title: `Order Uber + € `,
-      price: randomOptionInteger(optionFactor.orderUber),
-      isActive: randomBoolean(),
     }
-  ],
-  get offerList() {
-    return getOfferArray(shuffleElemetsOfArray([...this.eventOffer]));
   },
-  offerDescription: [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis
-  at fermentum pharetra.`,
-  `Aliquam erat volutpat. Nunc fermentum tortor
-  ac porta dapibus. In rutrum ac purus sit amet tempus.`,
-  `Aliquam id orci ut lectus varius viverra. Nullam nunc ex,
-  convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum
-  sed nibh vitae, sodales efficitur ipsum.`,
-  `Sed blandit, eros vel aliquam faucibus,
-  purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue
-  convallis suscipit in sed felis.`],
-  get offerDescriptionList() {
-    return getOfferArray(shuffleElemetsOfArray([...this.offerDescription]));
+  eventPrice,
+  eventOffer: [{
+    title: getEventOfferOption(),
+    offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
+    isActive: randomBoolean(),
   },
-  cityList: [
+  {
+    title: getEventOfferOption(),
+    offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
+    isActive: randomBoolean(),
+  },
+  ].slice(0, getRandomInteger(0, 3)),
+  eventCity: [
     `Moscow`,
     `Delhi`,
     `London`,
@@ -162,10 +120,9 @@ const createEventMockData = () => ({
     `New York`,
     `Los Angeles`,
     `Genova`,
-  ],
-  get city() {
-    return getRendomItemOfArray(this.cityList);
-  },
+  ][Math.floor(Math.random() * 7)],
+  offerDescription: getOfferArray(shuffleElemetsOfArray([...offerDescription])),
+  isFavorite: randomBoolean(),
   sightseeing: [
     `Natural History Museum`,
     `Central aquarium`,
@@ -179,7 +136,6 @@ const createEventMockData = () => ({
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
   ],
-  isFavorite: randomBoolean(),
 });
 
 export {createEventMockData};

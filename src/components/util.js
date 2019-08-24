@@ -20,22 +20,20 @@ const randomBoolean = () => Boolean(Math.round(Math.random()));
  *  @param {number} max максимальное значение целое число.
  *  @return {number} возращает случайное целое число между min и max - включительно
  */
-const getRandomInteger = (min, max) => {
-  return Math.floor(Math.random() * (max - min)) + min;
-};
+const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 /** Функция возращает случайное целое число кратное коэфциенту множителя
  * @param {number} factor коэфциент
  * @return {number} возращает случайное целое число
  */
-const randomOptionInteger = (factor) => Math.round(Math.random * factor);
-
+const randomOptionInteger = (factor) => Math.round(Math.random() * factor);
 /** Функция возращает массив тегов длины от 0 до 2 исходного массива.
  *  @param {array} array
  *  @return {array} возращает массив тегов длины от 0 до 2
  */
 const getOfferArray = (array) => {
-  return array.slice(MIN_OFFER_AMOUNT, getRandomInteger(MIN_OFFER_AMOUNT, MAX_OFFER_AMOUNT));
+  const description = array.slice(MIN_OFFER_AMOUNT, getRandomInteger(MIN_OFFER_AMOUNT, MAX_OFFER_AMOUNT));
+  return description.toString();
 };
 
 /** Функция перемешивает элементы массива
@@ -60,3 +58,4 @@ export {shuffleElemetsOfArray};
 export {randomBoolean};
 export {randomOptionInteger};
 export {getRendomItemOfArray};
+export {getRandomInteger};
