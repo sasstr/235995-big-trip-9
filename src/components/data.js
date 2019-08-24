@@ -21,7 +21,7 @@ const getEventOfferOption = () => [
   `Add luggage + € `,
   `Switch to comfort class  + € `,
   `Choose seats + € `,
-  `Add meal € `,
+  `Add meal + € `,
   `Rent a car + € `,
   `Add breakfast + € `,
   `Book tickets + € `,
@@ -32,47 +32,47 @@ const getEventOfferOption = () => [
 const eventList = [
   {
     title: `Bus to Geneva`,
-    icon: `bus.png`
+    icon: `img/icons/bus.png`
   },
   {
     title: `Check into hotel`,
-    icon: `check-in.png`
+    icon: `img/icons/check-in.png`
   },
   {
     title: `Drive to Los Angeles`,
-    icon: `drive.png`
+    icon: `img/icons/drive.png`
   },
   {
     title: `Flight to Moscow`,
-    icon: `flight.png`
+    icon: `img/icons/flight.png`
   },
   {
     title: `Go to restaurant `,
-    icon: `restaurant.png`
+    icon: `img/icons/restaurant.png`
   },
   {
     title: `Ship to London`,
-    icon: `ship.png`
+    icon: `img/icons/ship.png`
   },
   {
     title: `Go sightseeing at `,
-    icon: `sightseeing.png`
+    icon: `img/icons/sightseeing.png`
   },
   {
     title: `Taxi to Airport`,
-    icon: `taxi.png`
+    icon: `img/icons/taxi.png`
   },
   {
     title: `Train to New York`,
-    icon: `train.png`
+    icon: `img/icons/train.png`
   },
   {
     title: `transport to Los Angeles`,
-    icon: `transport.png`
+    icon: `img/icons/transport.png`
   },
   {
     title: `trip to Saint Peterburg`,
-    icon: `trip.png`
+    icon: `img/icons/trip.png`
   },
 ];
 
@@ -90,9 +90,9 @@ const offerDescription = [`Lorem ipsum dolor sit amet, consectetur adipiscing el
 const eventType = getRendomItemOfArray(eventList);
 const eventPrice = getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max);
 
-const createEventMockData = () => ({
-  eventTypeIcon: eventType.title,
-  eventTypeTitle: eventType.icon,
+const createEventData = () => ({
+  eventTypeIcon: eventType.icon,
+  eventTypeTitle: eventType.title,
   eventTime: {
     start: Date.now() + 1 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
     end: Date.now() + 2 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
@@ -101,7 +101,7 @@ const createEventMockData = () => ({
     }
   },
   eventPrice,
-  eventOffer: [{
+  offerList: [{
     title: getEventOfferOption(),
     offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
     isActive: randomBoolean(),
@@ -135,7 +135,7 @@ const createEventMockData = () => ({
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
-  ],
+  ].slice(0, getRandomInteger(1, 6)),
 });
-
-export {createEventMockData};
+console.log(createEventData());
+export {createEventData};
