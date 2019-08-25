@@ -36,47 +36,58 @@ const getEventOfferOption = () => [
 
 const eventList = [
   {
-    title: `Bus to Geneva`,
+    id: `bus`,
+    title: `Bus to `,
     icon: `img/icons/bus.png`
   },
   {
+    id: `check-in`,
     title: `Check into hotel`,
     icon: `img/icons/check-in.png`
   },
   {
-    title: `Drive to Los Angeles`,
+    id: `drive`,
+    title: `Drive to `,
     icon: `img/icons/drive.png`
   },
   {
-    title: `Flight to Moscow`,
+    id: `flight`,
+    title: `Flight to `,
     icon: `img/icons/flight.png`
   },
   {
+    id: `restaurant`,
     title: `Go to restaurant `,
     icon: `img/icons/restaurant.png`
   },
   {
-    title: `Ship to London`,
+    id: `ship`,
+    title: `Ship to `,
     icon: `img/icons/ship.png`
   },
   {
+    id: `sightseeing`,
     title: `Go sightseeing at `,
     icon: `img/icons/sightseeing.png`
   },
   {
+    id: `taxi`,
     title: `Taxi to Airport`,
     icon: `img/icons/taxi.png`
   },
   {
-    title: `Train to New York`,
+    id: `train`,
+    title: `Train to `,
     icon: `img/icons/train.png`
   },
   {
-    title: `transport to Los Angeles`,
+    id: `transport`,
+    title: `transport to `,
     icon: `img/icons/transport.png`
   },
   {
-    title: `trip to Saint Peterburg`,
+    id: `trip`,
+    title: `trip to `,
     icon: `img/icons/trip.png`
   },
 ];
@@ -97,6 +108,7 @@ const eventPrice = getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max);
 
 const createEventData = () => ({
   eventTypeIcon: eventType.icon,
+  eventTypeId: eventType.id,
   eventTypeTitle: eventType.title,
   eventTime: {
     start: getStartTime(),

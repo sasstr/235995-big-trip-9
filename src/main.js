@@ -1,4 +1,5 @@
 import {makeMenuTemplate} from './components/menu';
+import {createEventData} from './components/data';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';

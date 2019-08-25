@@ -52,7 +52,7 @@ const makeEventTemplate = (it, index) => `<li class="trip-days__item  day">
     </li>
 
     <li class="trip-events__item">
-      ${index === 0 ? getEditCard() : getEventItem(createEventData())}
+      ${index === 0 ? getEditCard(createEventData()) : getEventItem(createEventData())}
     </li>
 
     <li class="trip-events__item">
