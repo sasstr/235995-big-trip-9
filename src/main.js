@@ -1,8 +1,7 @@
-import {createEventData} from './components/data';
 import {makeMenuTemplate} from './components/menu';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
-import {makeEventTemplate, getEventItem} from './components/event-item';
+import {makeEventTemplate} from './components/event-item';
 import {makeRouteInformationTemplate} from './components/route-information';
 
 const CARD_COUNT = 3;

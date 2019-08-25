@@ -17,6 +17,11 @@ const Unit = {
   second: 1000
 };
 
+const randomTime = Date.now() + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
+const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
+const getStartTime = () => getStartHoursAndMinutes();
+const getEndTime = () => getStartHoursAndMinutes(getRandomInteger(5000777, 10345444));
+
 const getEventOfferOption = () => [
   `Add luggage + € `,
   `Switch to comfort class  + € `,
@@ -94,10 +99,17 @@ const createEventData = () => ({
   eventTypeIcon: eventType.icon,
   eventTypeTitle: eventType.title,
   eventTime: {
-    start: Date.now() + 1 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
-    end: Date.now() + 2 + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second,
+    start: getStartTime(),
+    end: getEndTime(),
     get duration() {
-      return this.endTime - this.startTime;
+      const diff = Math.abs(this.end - this.start);
+      let day = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) / Unit.day;
+      let hour = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) % Unit.day;
+      let minute = Math.floor(diff / Unit.second / Unit.hour) % Unit.minute;
+      day = day >= 1 ? `${day}D` : ``;
+      hour = hour >= 1 ? `${hour}H` : ``;
+      minute = minute ? `${minute}M` : ``;
+      return `${day} ${hour} ${minute}`;
     }
   },
   eventPrice,
@@ -137,5 +149,4 @@ const createEventData = () => ({
     `http://picsum.photos/300/150?r=${Math.random()}`,
   ].slice(0, getRandomInteger(1, 6)),
 });
-console.log(createEventData());
 export {createEventData};

@@ -1,7 +1,12 @@
 import {getEditCard} from './edit-event';
 import {createEventData} from '../components/data';
 
-const getEventItem = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, offerList, eventCity}) => `<div class="event">
+const timeOptions = {
+  hour: `2-digit`,
+  minute: `numeric`
+};
+
+const getEventItem = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, offerList}) => `<div class="event">
   <div class="event__type">
     <img class="event__type-icon" width="42" height="42" src="${eventTypeIcon}" alt="Event type icon">
   </div>
@@ -9,11 +14,11 @@ const getEventItem = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, off
 
   <div class="event__schedule">
     <p class="event__time">
-      <time class="event__start-time" datetime="2019-03-18T10:30">${eventTime.start}</time>
+      <time class="event__start-time" datetime="2019-03-18T10:30">${eventTime.start.toLocaleString(`en-GB`, timeOptions)}</time>
       &mdash;
-      <time class="event__end-time" datetime="2019-03-18T11:00">${eventTime.end}</time>
+      <time class="event__end-time" datetime="2019-03-18T11:00">${eventTime.end.toLocaleString(`en-GB`, timeOptions)}</time>
     </p>
-    <p class="event__duration">1H 30M</p>
+    <p class="event__duration">${eventTime.duration}</p>
   </div>
 
   <p class="event__price">
@@ -22,12 +27,12 @@ const getEventItem = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, off
 
   <h4 class="visually-hidden">Offers:</h4>
   <ul class="event__selected-offers">
-    <li class="event__offer">
-      <span class="event__offer-title">
-      ${offerList[0].title === undefined ? `` : offerList[0].title}</span>
-      ${offerList.title === undefined ? `` : `&plus; &euro;&nbsp;`}<span class="event__offer-price">
-      ${offerList[0].offerPrice === undefined ? `` : offerList[0].offerPrice}</span>
-      </li>
+      ${offerList.map((offer) =>
+    `<li class="event__offer">
+      <span class="event__offer-title">${offer.title === undefined ? `` : offer.title}</span>
+      <span class="event__offer-price">
+      ${offer.offerPrice === undefined ? `` : offer.offerPrice}</span>
+      </li>`.trim()).join(``)}
   </ul>
 
   <button class="event__rollup-btn" type="button">
