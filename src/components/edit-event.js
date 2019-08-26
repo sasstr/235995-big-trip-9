@@ -1,69 +1,29 @@
-const getEditCard = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, offerList, offerDescription, sightseeingPhoto, eventCity}) => `<form class="event  event--edit" action="#" method="post">
+const getEditCard = ({eventType, eventTime, eventPrice, offerList, offerDescription, sightseeingPhoto, eventCity, transferEvent, activityEvent}) => `<form class="event  event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
         <span class="visually-hidden">Choose event type</span>
-        <img class="event__type-icon" width="17" height="17" src="${eventTypeIcon}" alt="${eventTypeTitle}">
+        <img class="event__type-icon" width="17" height="17" src="${eventType.icon}" alt="${eventType.title}">
       </label>
       <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
       <div class="event__type-list">
         <fieldset class="event__type-group">
           <legend class="visually-hidden">Transfer</legend>
-
-          <div class="event__type-item">
-            <input id="event-type-taxi-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi">
-            <label class="event__type-label  event__type-label--taxi" for="event-type-taxi-1">Taxi</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-bus-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="bus">
-            <label class="event__type-label  event__type-label--bus" for="event-type-bus-1">Bus</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-train-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="train">
-            <label class="event__type-label  event__type-label--train" for="event-type-train-1">Train</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-ship-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="ship">
-            <label class="event__type-label  event__type-label--ship" for="event-type-ship-1">Ship</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-transport-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="transport">
-            <label class="event__type-label  event__type-label--transport" for="event-type-transport-1">Transport</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-drive-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="drive">
-            <label class="event__type-label  event__type-label--drive" for="event-type-drive-1">Drive</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-flight-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="flight" checked>
-            <label class="event__type-label  event__type-label--flight" for="event-type-flight-1">Flight</label>
-          </div>
+          ${transferEvent.map((transferType) =>
+    `<div class="event__type-item">
+          <input id="event-type-${transferType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${transferType}">
+          <label class="event__type-label  event__type-label--${transferType}" for="event-type-${transferType}-1">${transferType}</label>
+        </div>`.trim()).join(``)}
         </fieldset>
 
         <fieldset class="event__type-group">
           <legend class="visually-hidden">Activity</legend>
-
+          ${activityEvent.map((activityType) => `
           <div class="event__type-item">
-            <input id="event-type-check-in-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="check-in">
-            <label class="event__type-label  event__type-label--check-in" for="event-type-check-in-1">Check-in</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-sightseeing-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="sightseeing">
-            <label class="event__type-label  event__type-label--sightseeing" for="event-type-sightseeing-1">Sightseeing</label>
-          </div>
-
-          <div class="event__type-item">
-            <input id="event-type-restaurant-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="restaurant">
-            <label class="event__type-label  event__type-label--restaurant" for="event-type-restaurant-1">Restaurant</label>
-          </div>
+            <input id="event-type-${activityType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${activityType}">
+            <label class="event__type-label  event__type-label--${activityType}" for="event-type-${activityType}-1">${activityType}</label>
+          </div>`.trim()).join(``)}
         </fieldset>
       </div>
     </div>
@@ -171,15 +131,13 @@ const getEditCard = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, offe
 
     <section class="event__section  event__section--destination">
       <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-      <p class="event__destination-description">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
+      <p class="event__destination-description">
+        ${offerDescription}
+      </p>
 
       <div class="event__photos-container">
         <div class="event__photos-tape">
-          <img class="event__photo" src="img/photos/1.jpg" alt="Event photo">
-          <img class="event__photo" src="img/photos/2.jpg" alt="Event photo">
-          <img class="event__photo" src="img/photos/3.jpg" alt="Event photo">
-          <img class="event__photo" src="img/photos/4.jpg" alt="Event photo">
-          <img class="event__photo" src="img/photos/5.jpg" alt="Event photo">
+          ${sightseeingPhoto.map((photoUrl) => `<img class="event__photo" src="${photoUrl}" alt="Event photo"></img>`.trim()).join(``)}
         </div>
       </div>
     </section>

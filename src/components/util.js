@@ -1,5 +1,5 @@
-const MIN_OFFER_AMOUNT = 0;
-const MAX_OFFER_AMOUNT = 2;
+const MIN_OFFER_AMOUNT = 1;
+const MAX_OFFER_AMOUNT = 4;
 
 /** Функция возращает случайный элемент массива
  *

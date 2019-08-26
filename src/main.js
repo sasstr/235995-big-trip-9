@@ -5,7 +5,18 @@ import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';
 import {makeRouteInformationTemplate} from './components/route-information';
 
-const CARD_COUNT = 3;
+const CARD_COUNT = 8;
+const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
+  const eventsArray = [];
+  for (let i = 0; i < eventsNumberOnPage; i++) {
+    eventsArray.push(makeEventData());
+  }
+  return eventsArray;
+};
+
+const eventsDataArray = createEventsMockArray(createEventData, CARD_COUNT);
+console.log(eventsDataArray);
+console.log(eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0));
 /**
  * Функция возращает разметку карточек.
  * @param {number} cardCount колличество карточек задач.

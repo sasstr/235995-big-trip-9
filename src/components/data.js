@@ -67,7 +67,7 @@ const eventList = [
   },
   {
     id: `sightseeing`,
-    title: `Go sightseeing at `,
+    title: `Sightseeing at `,
     icon: `img/icons/sightseeing.png`
   },
   {
@@ -92,7 +92,7 @@ const eventList = [
   },
 ];
 
-const offerDescription = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+const offerDescriptions = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
   `Cras aliquet varius magna, non porta ligula feugiat eget.`,
   `Fusce tristique felis   at fermentum pharetra.`,
   `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
@@ -103,13 +103,64 @@ const offerDescription = [`Lorem ipsum dolor sit amet, consectetur adipiscing el
   `Sed sed nisi sed augue convallis suscipit in sed felis.`
 ];
 
-const eventType = getRendomItemOfArray(eventList);
-const eventPrice = getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max);
-
 const createEventData = () => ({
-  eventTypeIcon: eventType.icon,
-  eventTypeId: eventType.id,
-  eventTypeTitle: eventType.title,
+  eventType: [
+    {
+      id: `bus`,
+      title: `Bus to `,
+      icon: `img/icons/bus.png`
+    },
+    {
+      id: `Check-in`,
+      title: `Check into hotel`,
+      icon: `img/icons/check-in.png`
+    },
+    {
+      id: `drive`,
+      title: `Drive to `,
+      icon: `img/icons/drive.png`
+    },
+    {
+      id: `flight`,
+      title: `Flight to `,
+      icon: `img/icons/flight.png`
+    },
+    {
+      id: `Restaurant`,
+      title: `Go to restaurant `,
+      icon: `img/icons/restaurant.png`
+    },
+    {
+      id: `ship`,
+      title: `Ship to `,
+      icon: `img/icons/ship.png`
+    },
+    {
+      id: `sightseeing`,
+      title: `Sightseeing at `,
+      icon: `img/icons/sightseeing.png`
+    },
+    {
+      id: `taxi`,
+      title: `Taxi to Airport`,
+      icon: `img/icons/taxi.png`
+    },
+    {
+      id: `train`,
+      title: `Train to `,
+      icon: `img/icons/train.png`
+    },
+    {
+      id: `Transport`,
+      title: `Transport to `,
+      icon: `img/icons/transport.png`
+    },
+    {
+      id: `Trip`,
+      title: `Trip to `,
+      icon: `img/icons/trip.png`
+    },
+  ][Math.floor(Math.random() * 11)],
   eventTime: {
     start: getStartTime(),
     end: getEndTime(),
@@ -124,7 +175,7 @@ const createEventData = () => ({
       return `${day} ${hour} ${minute}`;
     }
   },
-  eventPrice,
+  eventPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
   offerList: [{
     title: getEventOfferOption(),
     offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
@@ -145,7 +196,7 @@ const createEventData = () => ({
     `Los Angeles`,
     `Genova`,
   ][Math.floor(Math.random() * 7)],
-  offerDescription: getOfferArray(shuffleElemetsOfArray([...offerDescription])),
+  offerDescription: getOfferArray(shuffleElemetsOfArray([...offerDescriptions])),
   isFavorite: randomBoolean(),
   sightseeing: [
     `Natural History Museum`,
@@ -160,5 +211,7 @@ const createEventData = () => ({
     `http://picsum.photos/300/150?r=${Math.random()}`,
     `http://picsum.photos/300/150?r=${Math.random()}`,
   ].slice(0, getRandomInteger(1, 6)),
+  transferEvent: [`Bus`, `Drive`, `Flight`, `Ship`, `Taxi`, `Train`, `Transport`],
+  activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
 });
 export {createEventData};

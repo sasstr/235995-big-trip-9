@@ -6,11 +6,11 @@ const timeOptions = {
   minute: `numeric`
 };
 
-const getEventItem = ({eventTypeIcon, eventTypeTitle, eventTime, eventPrice, offerList}) => `<div class="event">
+const getEventItem = ({eventType, eventTime, eventPrice, offerList, eventCity, activityEvent}) => `<div class="event">
   <div class="event__type">
-    <img class="event__type-icon" width="42" height="42" src="${eventTypeIcon}" alt="Event type icon">
+    <img class="event__type-icon" width="42" height="42" src="${eventType.icon}" alt="Event type icon">
   </div>
-  <h3 class="event__title">${eventTypeTitle}</h3>
+  <h3 class="event__title">${eventType.title} ${activityEvent.some((elem) => elem === eventType.id) ? `` : eventCity}</h3>
 
   <div class="event__schedule">
     <p class="event__time">
