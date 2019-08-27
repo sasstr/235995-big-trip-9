@@ -1,8 +1,7 @@
 import {randomBoolean,
   getRandomInteger,
   getOfferArray,
-  shuffleElemetsOfArray,
-  getRendomItemOfArray} from './util';
+  shuffleElemetsOfArray} from './util';
 
 const PRICE_RANGE = {
   max: 5,
@@ -18,79 +17,68 @@ const Unit = {
 };
 
 const randomTime = Date.now() + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
-const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
+const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime) + diff;
 const getStartTime = () => getStartHoursAndMinutes();
-const getEndTime = () => getStartHoursAndMinutes(getRandomInteger(5000777, 10345444));
+const getEndTime = () =>getStartHoursAndMinutes();
+
+const getMockTime = () => {
+  const start = getStartTime();
+  const end = getEndTime();
+  const duration = () => {
+    const diff = Math.abs(end - start);
+    let day = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) / Unit.day;
+    let hour = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) % Unit.day;
+    let minute = Math.floor(diff / Unit.second / Unit.hour) % Unit.minute;
+    day = day >= 1 ? `${day}D` : ``;
+    hour = hour >= 1 ? `${hour}H` : ``;
+    minute = minute ? `${minute}M` : ``;
+    return `${day} ${hour} ${minute}`;
+  };
+  return {
+    start,
+    end,
+    duration: duration(),
+  };
+};
 
 const getEventOfferOption = () => [
-  `Add luggage + € `,
-  `Switch to comfort class  + € `,
-  `Choose seats + € `,
-  `Add meal + € `,
-  `Rent a car + € `,
-  `Add breakfast + € `,
-  `Book tickets + € `,
-  `Lunch in city + € `,
-  `Order Uber + € `,
-][Math.floor(Math.random() * 9)];
-
-const eventList = [
   {
-    id: `bus`,
-    title: `Bus to `,
-    icon: `img/icons/bus.png`
+    title: `Add luggage`,
+    id: `luggage`,
   },
   {
-    id: `check-in`,
-    title: `Check into hotel`,
-    icon: `img/icons/check-in.png`
+    title: `Switch to comfort class`,
+    id: `comfort`,
   },
   {
-    id: `drive`,
-    title: `Drive to `,
-    icon: `img/icons/drive.png`
+    title: `Choose seats`,
+    id: `seats`,
   },
   {
-    id: `flight`,
-    title: `Flight to `,
-    icon: `img/icons/flight.png`
+    title: `Add meal`,
+    id: `meal`,
   },
   {
-    id: `restaurant`,
-    title: `Go to restaurant `,
-    icon: `img/icons/restaurant.png`
+    title: `Rent a car`,
+    id: `car`,
   },
   {
-    id: `ship`,
-    title: `Ship to `,
-    icon: `img/icons/ship.png`
+    title: `Add breakfast`,
+    id: `breakfast`,
   },
   {
-    id: `sightseeing`,
-    title: `Sightseeing at `,
-    icon: `img/icons/sightseeing.png`
+    title: `Book tickets`,
+    id: `tickets`,
   },
   {
+    title: `Lunch in city`,
+    id: `lunch`,
+  },
+  {
+    title: `Order Uber`,
     id: `taxi`,
-    title: `Taxi to Airport`,
-    icon: `img/icons/taxi.png`
   },
-  {
-    id: `train`,
-    title: `Train to `,
-    icon: `img/icons/train.png`
-  },
-  {
-    id: `transport`,
-    title: `transport to `,
-    icon: `img/icons/transport.png`
-  },
-  {
-    id: `trip`,
-    title: `trip to `,
-    icon: `img/icons/trip.png`
-  },
-];
+][Math.floor(Math.random() * 9)];
 
 const offerDescriptions = [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
   `Cras aliquet varius magna, non porta ligula feugiat eget.`,
@@ -177,12 +165,12 @@ const createEventData = () => ({
   },
   eventPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
   offerList: [{
-    title: getEventOfferOption(),
+    info: getEventOfferOption(),
     offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
     isActive: randomBoolean(),
   },
   {
-    title: getEventOfferOption(),
+    info: getEventOfferOption(),
     offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
     isActive: randomBoolean(),
   },
@@ -214,4 +202,5 @@ const createEventData = () => ({
   transferEvent: [`Bus`, `Drive`, `Flight`, `Ship`, `Taxi`, `Train`, `Transport`],
   activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
 });
+
 export {createEventData};

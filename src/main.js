@@ -5,7 +5,7 @@ import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';
 import {makeRouteInformationTemplate} from './components/route-information';
 
-const CARD_COUNT = 8;
+const CARD_COUNT = 3;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   const eventsArray = [];
   for (let i = 0; i < eventsNumberOnPage; i++) {

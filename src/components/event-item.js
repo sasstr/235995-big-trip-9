@@ -29,7 +29,7 @@ const getEventItem = ({eventType, eventTime, eventPrice, offerList, eventCity, a
   <ul class="event__selected-offers">
       ${offerList.map((offer) =>
     `<li class="event__offer">
-      <span class="event__offer-title">${offer.title === undefined ? `` : offer.title}</span>
+      <span class="event__offer-title">${offer.info.title === undefined ? `` : `${offer.info.title} + € `}</span>
       <span class="event__offer-price">
       ${offer.offerPrice === undefined ? `` : offer.offerPrice}</span>
       </li>`.trim()).join(``)}
