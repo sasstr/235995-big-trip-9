@@ -16,10 +16,20 @@ const Unit = {
   second: 1000
 };
 
+const timeOptions = {
+  day:` 2-digit`,
+  hour: `2-digit`,
+  minute: `numeric`
+};
+
+
 const randomTime = Date.now() + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
-const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime) + diff;
+const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
 const getStartTime = () => getStartHoursAndMinutes();
-const getEndTime = () =>getStartHoursAndMinutes();
+const getEndTime = () =>getStartHoursAndMinutes(getRandomInteger(500000, 400000000));
+const addFirstZero = (value) => (value < 10 ? `0` : ``) + value;
+// const getDate = (date) => `${date.getHours()}${`:`}${(addFirstZero(date.getMinutes()))}`;
+console.log(randomTime);
 
 const getMockTime = () => {
   const start = getStartTime();
@@ -29,9 +39,9 @@ const getMockTime = () => {
     let day = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) / Unit.day;
     let hour = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) % Unit.day;
     let minute = Math.floor(diff / Unit.second / Unit.hour) % Unit.minute;
-    day = day >= 1 ? `${day}D` : ``;
+    day = day >= 1 ? `${addFirstZero(day)}D` : ``;
     hour = hour >= 1 ? `${hour}H` : ``;
-    minute = minute ? `${minute}M` : ``;
+    minute = minute ? `${addFirstZero(minute)}M` : ``;
     return `${day} ${hour} ${minute}`;
   };
   return {
@@ -157,9 +167,9 @@ const createEventData = () => ({
       let day = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) / Unit.day;
       let hour = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) % Unit.day;
       let minute = Math.floor(diff / Unit.second / Unit.hour) % Unit.minute;
-      day = day >= 1 ? `${day}D` : ``;
+      day = day >= 1 ? `${addFirstZero(Math.floor(day))}D` : ``;
       hour = hour >= 1 ? `${hour}H` : ``;
-      minute = minute ? `${minute}M` : ``;
+      minute = minute ? `${addFirstZero(minute)}M` : ``;
       return `${day} ${hour} ${minute}`;
     }
   },
