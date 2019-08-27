@@ -43,7 +43,7 @@ const makeSortFormTemplate = () => `<form class="trip-events__trip-sort  trip-so
     <input id="sort-${sortItem.name}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${sortItem.name}"
     ${sortItem.name === `event` ? `checked` : ``}>
     <label class="trip-sort__btn" for="sort-event">${sortItem.label}${sortItem.svg}</label>
-  </div>`.trim() }`).join()}
+  </div>`.trim() }`).join(``)}
   </form>`.trim();
 
 export {makeSortFormTemplate};
