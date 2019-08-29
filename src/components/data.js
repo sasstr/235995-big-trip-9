@@ -16,16 +16,9 @@ const Unit = {
   second: 1000
 };
 
-const timeOptions = {
-  day:` 2-digit`,
-  hour: `2-digit`,
-  minute: `numeric`
-};
-
-
 const randomTime = Date.now() + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
 const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
-const getStartTime = () => getStartHoursAndMinutes();
+const getStartTime = () => getStartHoursAndMinutes(getRandomInteger(500990, 7000000));
 const getEndTime = () =>getStartHoursAndMinutes(getRandomInteger(500000, 400000000));
 const addFirstZero = (value) => (value < 10 ? `0` : ``) + value;
 // const getDate = (date) => `${date.getHours()}${`:`}${(addFirstZero(date.getMinutes()))}`;
@@ -168,7 +161,7 @@ const createEventData = () => ({
       let hour = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) % Unit.day;
       let minute = Math.floor(diff / Unit.second / Unit.hour) % Unit.minute;
       day = day >= 1 ? `${addFirstZero(Math.floor(day))}D` : ``;
-      hour = hour >= 1 ? `${hour}H` : ``;
+      hour = hour >= 1 ? `${addFirstZero(hour)}H` : ``;
       minute = minute ? `${addFirstZero(minute)}M` : ``;
       return `${day} ${hour} ${minute}`;
     }

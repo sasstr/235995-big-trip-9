@@ -4,6 +4,12 @@ import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';
 import {makeRouteInformationTemplate} from './components/route-information';
+import {days, someDate, makeTripDaysArray, sortTripDays} from './components/mock';
+console.log(days);
+console.log(someDate);
+console.log(sortTripDays(days));
+console.log(makeTripDaysArray(days));
+
 
 const CARD_COUNT = 3;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
