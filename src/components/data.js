@@ -153,8 +153,8 @@ const createEventData = () => ({
     },
   ][Math.floor(Math.random() * 11)],
   eventTime: {
-    start: getStartTime(),
-    end: getEndTime(),
+    start: Date.parse(getStartTime()),
+    end: Date.parse(getEndTime()),
     get duration() {
       const diff = Math.abs(this.end - this.start);
       let day = Math.floor(diff / Unit.second / Unit.hour / Unit.minute) / Unit.day;

@@ -4,14 +4,8 @@ import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';
 import {makeRouteInformationTemplate} from './components/route-information';
-import {days, someDate, makeTripDaysArray, sortTripDays} from './components/mock';
-console.log(days);
-console.log(someDate);
-console.log(sortTripDays(days));
-console.log(makeTripDaysArray(days));
 
-
-const CARD_COUNT = 3;
+const CARD_COUNT = 8;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   const eventsArray = [];
   for (let i = 0; i < eventsNumberOnPage; i++) {
@@ -22,6 +16,28 @@ const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
 
 const eventsDataArray = createEventsMockArray(createEventData, CARD_COUNT);
 console.log(eventsDataArray);
+
+// функция возращает таймстэмп без часов минут и секунд с милисекундами
+/* const getEventDayDate = (date) => Date.parse(date.toISOString()
+                                                        .slice(0, 10)
+                                                        .split(`-`)
+                                                        .join(`, `));
+
+const unsortedDays = eventsDataArray.reduce((acc, it) =>{
+  const dt = getEventDayDate(it.eventTime.start);
+  if (!acc[dt]) {
+    acc[dt] = [];
+  }
+  acc[dt].push(it);
+  return acc;
+}, {});
+
+const daysSorted = Object.entries(unsortedDays())
+                          .sort((a, b) => {
+                            return a[0] - b[0];
+                          });
+console.log(daysSorted); */
+
 console.log(eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0));
 /**
  * Функция возращает разметку карточек.
