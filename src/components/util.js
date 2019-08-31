@@ -1,6 +1,14 @@
 const MIN_OFFER_AMOUNT = 1;
 const MAX_OFFER_AMOUNT = 4;
 
+const Unit = {
+  week: 7,
+  day: 24,
+  hour: 60,
+  minute: 60,
+  second: 1000
+};
+
 /** Функция возращает случайный элемент массива
  *
  * @param {array} array массив
@@ -53,9 +61,30 @@ const shuffleElemetsOfArray = (array) => {
   return cloneArray;
 };
 
-export {getOfferArray};
-export {shuffleElemetsOfArray};
-export {randomBoolean};
-export {randomOptionInteger};
-export {getRendomItemOfArray};
-export {getRandomInteger};
+// Функция форматирует дату добавляя ноль в начале
+const addFirstZero = (value) => (value < 10 ? `0` : ``) + value;
+
+// Функция возращает случайную дату в переделах недели
+const getRandomTime = () => Date.now() + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
+
+// Функция рассчитывает разницу во времени между начальной и конечной датами.
+const formatTime = (dateInfo) => {
+  let day = Math.floor(dateInfo / Unit.second / Unit.hour / Unit.minute) / Unit.day;
+  let hour = Math.floor(dateInfo / Unit.second / Unit.hour / Unit.minute) % Unit.day;
+  let minute = Math.floor(dateInfo / Unit.second / Unit.hour) % Unit.minute;
+  day = day >= 1 ? `${addFirstZero(day)}D` : ``;
+  hour = hour >= 1 ? `${hour}H` : ``;
+  minute = minute ? `${addFirstZero(minute)}M` : ``;
+  return `${day} ${hour} ${minute}`;
+};
+
+export {getOfferArray,
+  shuffleElemetsOfArray,
+  randomBoolean,
+  randomOptionInteger,
+  getRendomItemOfArray,
+  getRandomInteger,
+  formatTime,
+  getRandomTime
+};
+

@@ -12,8 +12,8 @@ const getEditCard = ({eventType, eventTime, eventPrice, offerList, offerDescript
           <legend class="visually-hidden">Transfer</legend>
           ${transferEvent.map((transferType) =>
     `<div class="event__type-item">
-          <input id="event-type-${transferType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${transferType}">
-          <label class="event__type-label  event__type-label--${transferType}" for="event-type-${transferType}-1">${transferType}</label>
+          <input id="event-type-${transferType.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${transferType.toLowerCase()}">
+          <label class="event__type-label  event__type-label--${transferType.toLowerCase()}" for="event-type-${transferType.toLowerCase()}-1">${transferType}</label>
         </div>`.trim()).join(``)}
         </fieldset>
 
@@ -21,8 +21,8 @@ const getEditCard = ({eventType, eventTime, eventPrice, offerList, offerDescript
           <legend class="visually-hidden">Activity</legend>
           ${activityEvent.map((activityType) => `
           <div class="event__type-item">
-            <input id="event-type-${activityType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${activityType}">
-            <label class="event__type-label  event__type-label--${activityType}" for="event-type-${activityType}-1">${activityType}</label>
+            <input id="event-type-${activityType.toLowerCase()}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${activityType.toLowerCase()}">
+            <label class="event__type-label  event__type-label--${activityType.toLowerCase()}" for="event-type-${activityType.toLowerCase()}-1">${activityType}</label>
           </div>`.trim()).join(``)}
         </fieldset>
       </div>

@@ -1,5 +1,3 @@
-import {eventsDataArray} from '../main';
-
 const days = [
   {
     eventTime: new Date(2019, 8, 3, 3, 5, 33),

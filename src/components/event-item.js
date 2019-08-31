@@ -1,5 +1,6 @@
 import {getEditCard} from './edit-event';
-import {createEventData} from '../components/data';
+import {formatTime} from './util';
+import {createEvent} from '../components/data';
 
 const timeOptions = {
   hour: `2-digit`,
@@ -18,7 +19,7 @@ const getEventItem = ({eventType, eventTime, eventPrice, offerList, eventCity, a
       &mdash;
       <time class="event__end-time" datetime="2019-03-18T11:00">${eventTime.end.toLocaleString(`en-GB`, timeOptions)}</time>
     </p>
-    <p class="event__duration">${eventTime.duration}</p>
+    <p class="event__duration">${formatTime(eventTime.duration)}</p>
   </div>
 
   <p class="event__price">
@@ -48,15 +49,15 @@ const makeEventTemplate = (it, index) => `<li class="trip-days__item  day">
 
   <ul class="trip-events__list">
     <li class="trip-events__item">
-      ${getEventItem(createEventData())}
+      ${getEventItem(createEvent())}
     </li>
 
     <li class="trip-events__item">
-      ${index === 0 ? getEditCard(createEventData()) : getEventItem(createEventData())}
+      ${index === 0 ? getEditCard(createEvent()) : getEventItem(createEvent())}
     </li>
 
     <li class="trip-events__item">
-      ${getEventItem(createEventData())}
+      ${getEventItem(createEvent())}
     </li>
   </ul>
 </li>`.trim();

@@ -1,5 +1,5 @@
 import {makeMenuTemplate} from './components/menu';
-import {createEventData} from './components/data';
+import {createEvent} from './components/data';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';
@@ -14,14 +14,16 @@ const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return eventsArray;
 };
 
-const eventsDataArray = createEventsMockArray(createEventData, CARD_COUNT);
+const eventsDataArray = createEventsMockArray(createEvent, CARD_COUNT);
 console.log(eventsDataArray);
 
 // функция возращает таймстэмп без часов минут и секунд с милисекундами
-/* const getEventDayDate = (date) => Date.parse(date.toISOString()
-                                                        .slice(0, 10)
-                                                        .split(`-`)
-                                                        .join(`, `));
+const getEventDayDate = (date) => {
+  return Date.parse(new Date(date).toISOString()
+                                  .slice(0, 10)
+                                  .split(`-`)
+                                  .join(`, `));
+};
 
 const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   const dt = getEventDayDate(it.eventTime.start);
@@ -32,13 +34,29 @@ const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   return acc;
 }, {});
 
-const daysSorted = Object.entries(unsortedDays())
+const daysSorted = Object.entries(unsortedDays)
                           .sort((a, b) => {
                             return a[0] - b[0];
                           });
-console.log(daysSorted); */
+console.log(daysSorted);
 
-console.log(eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0));
+// Оставляем в массиве городов только те что не повторились подряд.
+const getRouteCities = (eventsArray) => {
+  const cities = [];
+  cities.push(eventsArray[0].eventCity);
+  for (let i = 0; i < eventsArray.length; i++) {
+    if (i > 0 && eventsArray[i - 1].eventCity !== eventsArray[i].eventCity) {
+      cities.push(eventsArray[i].eventCity);
+    }
+  }
+  return cities;
+};
+
+console.log(getRouteCities(eventsDataArray));
+// Считаем общую стоимость поездки
+const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
+ console.log(totalPrice);
+
 /**
  * Функция возращает разметку карточек.
  * @param {number} cardCount колличество карточек задач.
