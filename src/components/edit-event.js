@@ -44,12 +44,12 @@ const getEditCard = ({eventType, eventTime, eventPrice, offerList, offerDescript
       <label class="visually-hidden" for="event-start-time-1">
         From
       </label>
-      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${eventTime.start.toLocaleString(`en-GB`, {year: `numeric`, month: `numeric`, day: `numeric`, hour: `numeric`, minute: `numeric`})}">
+      <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${new Date(eventTime.start).toLocaleString(`en-GB`, {year: `numeric`, month: `numeric`, day: `numeric`, hour: `numeric`, minute: `numeric`})}">
       &mdash;
       <label class="visually-hidden" for="event-end-time-1">
         To
       </label>
-      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${eventTime.end.toLocaleString(`en-GB`, {year: `numeric`, month: `numeric`, day: `numeric`, hour: `numeric`, minute: `numeric`})}">
+      <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${new Date(eventTime.end).toLocaleString(`en-GB`, {year: `numeric`, month: `numeric`, day: `numeric`, hour: `numeric`, minute: `numeric`})}">
     </div>
 
     <div class="event__field-group  event__field-group--price">

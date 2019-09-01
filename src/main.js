@@ -49,7 +49,7 @@ const getRouteCities = (eventsArray) => {
   }
   return cities;
 };
-
+const cities = getRouteCities(eventsDataArray);
 // Считаем общую стоимость поездки
 const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
 
@@ -70,7 +70,7 @@ const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, curre
 const renderTemplate = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);
 
 const tripInfo = document.querySelector(`.trip-info`);
-renderTemplate(tripInfo, makeRouteInformationTemplate(), `afterBegin`);
+renderTemplate(tripInfo, makeRouteInformationTemplate(totalPrice, cities, daysSorted), `afterBegin`);
 
 const tripControl = document.querySelector(`.trip-controls`);
 renderTemplate(tripControl, makeMenuTemplate());

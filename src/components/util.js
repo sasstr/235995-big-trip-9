@@ -69,7 +69,8 @@ const getRandomTime = () => Date.now() + Math.floor(Math.random() * Unit.week) *
 
 // Функция рассчитывает разницу во времени между начальной и конечной датами.
 const formatTime = (dateInfo) => {
-  let day = Math.floor(dateInfo / Unit.second / Unit.hour / Unit.minute) / Unit.day;
+  dateInfo = Math.abs(dateInfo);
+  let day = Math.floor((dateInfo / Unit.second / Unit.hour / Unit.minute) / Unit.day);
   let hour = Math.floor(dateInfo / Unit.second / Unit.hour / Unit.minute) % Unit.day;
   let minute = Math.floor(dateInfo / Unit.second / Unit.hour) % Unit.minute;
   day = day >= 1 ? `${addFirstZero(day)}D` : ``;
