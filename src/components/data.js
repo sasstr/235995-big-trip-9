@@ -140,7 +140,7 @@ const typesSightseeing = [
   `Central aquarium`,
   `Red Fort`,
   `Tower Bridge`,
-]
+];
 
 const createEvent = () => ({
   eventType: getRendomItemOfArray(eventsTypes),

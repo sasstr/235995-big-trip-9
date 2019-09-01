@@ -3,7 +3,6 @@ import {createEvent} from './components/data';
 import {makeDaysTemplate} from './components/trip-days';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
-import {makeEventTemplate} from './components/event-item';
 import {makeRouteInformationTemplate} from './components/route-information';
 
 const CARD_COUNT = 8;
@@ -16,7 +15,6 @@ const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
 };
 
 const eventsDataArray = createEventsMockArray(createEvent, CARD_COUNT);
-console.log(eventsDataArray);
 
 // функция возращает таймстэмп без часов минут и секунд с милисекундами
 const getEventDayDate = (date) => {
@@ -34,12 +32,11 @@ const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   acc[dt].push(it);
   return acc;
 }, {});
-console.log(unsortedDays);
+
 const daysSorted = Object.entries(unsortedDays)
                           .sort((a, b) => {
                             return a[0] - b[0];
                           });
-console.log(daysSorted);
 
 // Оставляем в массиве городов только те что не повторились подряд.
 const getRouteCities = (eventsArray) => {
@@ -55,14 +52,13 @@ const getRouteCities = (eventsArray) => {
 
 // Считаем общую стоимость поездки
 const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
- console.log(totalPrice);
 
 /**
  * Функция возращает разметку карточек.
  * @param {number} cardCount колличество карточек задач.
  * @return {string}
  */
-const createEventsMock = (cardCount) => new Array(cardCount).fill().map(makeEventTemplate).join(``);
+/* const createEventsMock = (cardCount) => new Array(cardCount).fill().map(makeEventTemplate).join(``); */
 
 /**
  * Функция рендерит разметку.

@@ -1,4 +1,5 @@
-import {getEditCard, getEventItem} from './edit-event';
+import {getEditCard} from './edit-event';
+import {getEventItem} from './event-item';
 
 const makeDaysTemplate = (days) => `<ul class="trip-days">
 ${ days.map((day, index) => `<li class="trip-days__item  day">
