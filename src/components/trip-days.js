@@ -7,15 +7,15 @@ ${ days.map((day, index) => `<li class="trip-days__item  day">
       <span class="day__counter">${index + 1}</span>
       <time class="day__date" datetime="${new Date(+day[0]).toISOString().slice(0, 10)}">
       ${new Date(+day[0]).toLocaleString(`en-GB`, {
-  month: `short`,
-  day: `2-digit`
-})}</time>
+    month: `short`,
+    day: `2-digit`
+  })}</time>
     </div>
     <ul class="trip-events__list">
       ${day[index] === days[0][0] ? getEditCard(day[1][index]) : ``}
       ${day[1].map((event) => getEventItem(event))}
     </ul>
-  </li>`)}
+    </li>`)}
   </ul>`.trim();
 
 export {makeDaysTemplate};
