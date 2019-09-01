@@ -7,13 +7,9 @@ import {makeRouteInformationTemplate} from './components/route-information';
 
 const CARD_COUNT = 8;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
-  const eventsArray = [];
-  for (let i = 0; i < eventsNumberOnPage; i++) {
-    eventsArray.push(makeEventData());
-  }
-  return eventsArray;
+  return new Array(eventsNumberOnPage).fill(``).map(makeEventData);
 };
-
+// eventsArray(eventsNumberOnPage).fill('').map(makeEventData)
 const eventsDataArray = createEventsMockArray(createEvent, CARD_COUNT);
 
 // функция возращает таймстэмп без часов минут и секунд с милисекундами
@@ -23,7 +19,7 @@ const getEventDayDate = (date) => {
                                   .split(`-`)
                                   .join(`, `));
 };
-
+// Получаем массив отсортированных дней с событиями.
 const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   const dt = getEventDayDate(it.eventTime.start);
   if (!acc[dt]) {
@@ -52,13 +48,6 @@ const getRouteCities = (eventsArray) => {
 const cities = getRouteCities(eventsDataArray);
 // Считаем общую стоимость поездки
 const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
-
-/**
- * Функция возращает разметку карточек.
- * @param {number} cardCount колличество карточек задач.
- * @return {string}
- */
-/* const createEventsMock = (cardCount) => new Array(cardCount).fill().map(makeEventTemplate).join(``); */
 
 /**
  * Функция рендерит разметку.

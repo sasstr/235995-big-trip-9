@@ -15,8 +15,6 @@ const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
 const getStartTime = () => getStartHoursAndMinutes(getRandomInteger(500990, 700000000));
 const getEndTime = () => getStartHoursAndMinutes(getRandomInteger(500000, 400000000));
 
-// const getDate = (date) => `${date.getHours()}${`:`}${(addFirstZero(date.getMinutes()))}`;
-
 const OfferOptionList = [
   {
     title: `Add luggage`,
