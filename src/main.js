@@ -1,5 +1,6 @@
 import {makeMenuTemplate} from './components/menu';
 import {createEvent} from './components/data';
+import {makeDaysTemplate} from './components/trip-days';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
 import {makeEventTemplate} from './components/event-item';
@@ -33,7 +34,7 @@ const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   acc[dt].push(it);
   return acc;
 }, {});
-
+console.log(unsortedDays);
 const daysSorted = Object.entries(unsortedDays)
                           .sort((a, b) => {
                             return a[0] - b[0];
@@ -52,7 +53,6 @@ const getRouteCities = (eventsArray) => {
   return cities;
 };
 
-console.log(getRouteCities(eventsDataArray));
 // Считаем общую стоимость поездки
 const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
  console.log(totalPrice);
@@ -82,4 +82,4 @@ renderTemplate(tripControl, makeFiltersTemplate());
 
 const tripEvents = document.querySelector(`.trip-events`);
 renderTemplate(tripEvents, makeSortFormTemplate());
-renderTemplate(tripEvents, createEventsMock(CARD_COUNT));
+renderTemplate(tripEvents, makeDaysTemplate(daysSorted));
