@@ -12,8 +12,9 @@ ${ days.map((day, index) => `<li class="trip-days__item  day">
   })}</time>
     </div>
     <ul class="trip-events__list">
-      ${day[index] === days[0][0] ? getEditCard(day[1][index]) : ``}
-      ${day[1].map((event) => getEventItem(event))}
+      ${day[1].sort((a, b) => (+a.eventTime.start) - (+b.eventTime.start))
+           .map((event) => (day[1][index] === event && index === 0) ? getEditCard(event) : getEventItem(event))}
+
     </ul>
     </li>`)}
   </ul>`.trim();

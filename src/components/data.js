@@ -10,10 +10,17 @@ const PRICE_RANGE = {
   min: 250,
 };
 
+const RANDOM_TIME = {
+  beginStart: 500990,
+  finishStart: 700000000,
+  beginEnd: 500990,
+  finishEnd: 700000000,
+};
+
 const randomTime = getRandomTime();
 const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
-const getStartTime = () => getStartHoursAndMinutes(getRandomInteger(500990, 700000000));
-const getEndTime = () => getStartHoursAndMinutes(getRandomInteger(500000, 400000000));
+const getStartTime = () => getStartHoursAndMinutes(getRandomInteger(RANDOM_TIME.beginStart, RANDOM_TIME.finishStart));
+const getEndTime = () => getStartHoursAndMinutes(getRandomInteger(RANDOM_TIME.beginEnd, RANDOM_TIME.finishEnd));
 
 const OfferOptionList = [
   {
@@ -140,6 +147,56 @@ const typesSightseeing = [
   `Tower Bridge`,
 ];
 
+const getTripTabs = () => [
+  {
+    name: `Table`,
+    isActive: `trip-tabs__btn--active`,
+  },
+  {
+    name: `Stats`,
+    isActive: ``,
+  }
+];
+
+// Передает данные для шаблона сортировки
+const getSortItems = () => [
+  {
+    tag: `span`,
+    name: `day`,
+    label: `Day`,
+    svg: ``,
+  },
+  {
+    tag: `div`,
+    name: `event`,
+    label: `Event`,
+    svg: ``,
+  },
+  {
+    tag: `div`,
+    name: `time`,
+    label: `Time`,
+    svg: `<svg class="trip-sort__direction-icon" width="8" height="10" viewBox="0 0 8 10">
+      <path d="M2.888 4.852V9.694H5.588V4.852L7.91 5.068L4.238 0.00999987L0.548 5.068L2.888 4.852Z"/>
+    </svg>`,
+  },
+  {
+    tag: `div`,
+    name: `price`,
+    label: `Price`,
+    svg: `<svg class="trip-sort__direction-icon" width="8" height="10" viewBox="0 0 8 10">
+      <path d="M2.888 4.852V9.694H5.588V4.852L7.91 5.068L4.238 0.00999987L0.548 5.068L2.888 4.852Z"/>
+    </svg>`,
+  },
+  {
+    tag: `span`,
+    name: `offers`,
+    label: `Offers`,
+    svg: ``,
+  },
+];
+
+// Генерирует моковые данные для собития event
 const createEvent = () => ({
   eventType: getRendomItemOfArray(eventsTypes),
   eventTime: {
@@ -176,4 +233,4 @@ const createEvent = () => ({
   activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
 });
 
-export {createEvent};
+export {createEvent, getSortItems, getTripTabs};

@@ -1,5 +1,5 @@
 import {makeMenuTemplate} from './components/menu';
-import {createEvent} from './components/data';
+import {createEvent, getSortItems, getTripTabs} from './components/data';
 import {makeDaysTemplate} from './components/trip-days';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
@@ -19,7 +19,7 @@ const getEventDayDate = (date) => {
                                   .split(`-`)
                                   .join(`, `));
 };
-// Получаем массив отсортированных дней с событиями.
+// Получаем массив неотсортированных дней с событиями.
 const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   const dt = getEventDayDate(it.eventTime.start);
   if (!acc[dt]) {
@@ -62,9 +62,9 @@ const tripInfo = document.querySelector(`.trip-info`);
 renderTemplate(tripInfo, makeRouteInformationTemplate(totalPrice, cities, daysSorted), `afterBegin`);
 
 const tripControl = document.querySelector(`.trip-controls`);
-renderTemplate(tripControl, makeMenuTemplate());
+renderTemplate(tripControl, makeMenuTemplate(getTripTabs()));
 renderTemplate(tripControl, makeFiltersTemplate());
 
 const tripEvents = document.querySelector(`.trip-events`);
-renderTemplate(tripEvents, makeSortFormTemplate());
+renderTemplate(tripEvents, makeSortFormTemplate(getSortItems()));
 renderTemplate(tripEvents, makeDaysTemplate(daysSorted));
