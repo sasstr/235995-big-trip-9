@@ -13,9 +13,9 @@ const getEventItem = ({eventType, eventTime, eventPrice, offerList, eventCity, a
 
   <div class="event__schedule">
     <p class="event__time">
-      <time class="event__start-time" datetime="${new Date(eventTime.start).toISOString().slice(0, 17)}">${new Date(eventTime.start).toLocaleString(`en-GB`, timeOptions)}</time>
+      <time class="event__start-time" datetime="${new Date(eventTime.start).toISOString().slice(0, 17)}">${new Date(eventTime.start).toISOString().slice(11, 16)}</time>
       &mdash;
-      <time class="event__end-time" datetime="${new Date(eventTime.start).toISOString().slice(0, 17)}">${new Date(eventTime.end).toLocaleString(`en-GB`, timeOptions)}</time>
+      <time class="event__end-time" datetime="${new Date(eventTime.start).toISOString().slice(0, 17)}">${new Date(eventTime.end).toISOString().slice(11, 16)}</time>
     </p>
     <p class="event__duration">${formatTime(eventTime.duration)}</p>
   </div>

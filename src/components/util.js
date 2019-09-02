@@ -72,7 +72,7 @@ const addFirstZero = (value) => (value < 10 ? `0` : ``) + value;
 // Функция возращает случайную дату в переделах недели
 const getRandomTime = () => Date.now() + getRandomInteger(RANDOM_TIME.begin, RANDOM_TIME.finish) + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
 
-// Функция рассчитывает разницу во времени между начальной и конечной датами.
+// Функция  и выводит в нужном формате.
 const formatTime = (dateInfo) => {
   dateInfo = Math.abs(dateInfo);
   let day = Math.floor((dateInfo / Unit.second / Unit.hour / Unit.minute) / Unit.day);

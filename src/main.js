@@ -5,12 +5,12 @@ import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
 import {makeRouteInformationTemplate} from './components/route-information';
 
-const CARD_COUNT = 8;
+const EVENT_COUNT = 8;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return new Array(eventsNumberOnPage).fill(``).map(makeEventData);
 };
 // eventsArray(eventsNumberOnPage).fill('').map(makeEventData)
-const eventsDataArray = createEventsMockArray(createEvent, CARD_COUNT);
+const eventsDataArray = createEventsMockArray(createEvent, EVENT_COUNT);
 
 // функция возращает таймстэмп без часов минут и секунд с милисекундами
 const getEventDayDate = (date) => {
@@ -45,7 +45,7 @@ const getRouteCities = (eventsArray) => {
   }
   return cities;
 };
-const cities = getRouteCities(eventsDataArray);
+
 // Считаем общую стоимость поездки
 const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
 
@@ -59,7 +59,7 @@ const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, curre
 const renderTemplate = (container, markup, place = `beforeend`) => container.insertAdjacentHTML(place, markup);
 
 const tripInfo = document.querySelector(`.trip-info`);
-renderTemplate(tripInfo, makeRouteInformationTemplate(totalPrice, cities, daysSorted), `afterBegin`);
+renderTemplate(tripInfo, makeRouteInformationTemplate(totalPrice, getRouteCities(eventsDataArray), daysSorted), `afterBegin`);
 
 const tripControl = document.querySelector(`.trip-controls`);
 renderTemplate(tripControl, makeMenuTemplate(getTripTabs()));
