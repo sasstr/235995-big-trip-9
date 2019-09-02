@@ -1,5 +1,5 @@
 import {makeMenuTemplate} from './components/menu';
-import {createEvent, getSortItems, getTripTabs} from './components/data';
+import {createEvent, getSortItems, getTripTabs, getFilters} from './components/data';
 import {makeDaysTemplate} from './components/trip-days';
 import {makeFiltersTemplate} from './components/filters';
 import {makeSortFormTemplate} from './components/sort';
@@ -63,7 +63,7 @@ renderTemplate(tripInfo, makeRouteInformationTemplate(totalPrice, cities, daysSo
 
 const tripControl = document.querySelector(`.trip-controls`);
 renderTemplate(tripControl, makeMenuTemplate(getTripTabs()));
-renderTemplate(tripControl, makeFiltersTemplate());
+renderTemplate(tripControl, makeFiltersTemplate(getFilters()));
 
 const tripEvents = document.querySelector(`.trip-events`);
 renderTemplate(tripEvents, makeSortFormTemplate(getSortItems()));

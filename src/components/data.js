@@ -18,9 +18,9 @@ const RANDOM_TIME = {
 };
 
 const randomTime = getRandomTime();
-const getStartHoursAndMinutes = (diff = 0) => new Date(randomTime + diff);
-const getStartTime = () => getStartHoursAndMinutes(getRandomInteger(RANDOM_TIME.beginStart, RANDOM_TIME.finishStart));
-const getEndTime = () => getStartHoursAndMinutes(getRandomInteger(RANDOM_TIME.beginEnd, RANDOM_TIME.finishEnd));
+const getTime = (diff = 0) => new Date(randomTime + diff);
+const getStartTime = () => getTime(getRandomInteger(RANDOM_TIME.beginStart, RANDOM_TIME.finishStart));
+const getEndTime = () => getTime(getRandomInteger(RANDOM_TIME.beginEnd, RANDOM_TIME.finishEnd));
 
 const OfferOptionList = [
   {
@@ -147,6 +147,23 @@ const typesSightseeing = [
   `Tower Bridge`,
 ];
 
+// // Передает данные для шаблона фильтров
+const getFilters = () => [
+  {
+    id: `everything`,
+    title: `Everything`,
+  },
+  {
+    id: `future`,
+    title: `Future`,
+  },
+  {
+    id: `past`,
+    title: `Past`,
+  },
+];
+
+// Передает данные для шаблона меню
 const getTripTabs = () => [
   {
     name: `Table`,
@@ -233,4 +250,4 @@ const createEvent = () => ({
   activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
 });
 
-export {createEvent, getSortItems, getTripTabs};
+export {createEvent, getSortItems, getTripTabs, getFilters};
