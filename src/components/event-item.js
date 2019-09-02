@@ -1,10 +1,5 @@
 import {formatTime} from './util';
 
-const timeOptions = {
-  hour: `2-digit`,
-  minute: `numeric`
-};
-
 const getEventItem = ({eventType, eventTime, eventPrice, offerList, eventCity, activityEvent}) => `<div class="event">
   <div class="event__type">
     <img class="event__type-icon" width="42" height="42" src="${eventType.icon}" alt="Event type icon">
