@@ -3,24 +3,12 @@ import {randomBoolean,
   getRandomInteger,
   getOfferArray,
   shuffleElemetsOfArray,
-  getRandomTime} from './util';
+  getEventTime} from './util';
 
 const PRICE_RANGE = {
-  max: 5,
-  min: 250,
+  max: 10,
+  min: 500,
 };
-
-const RANDOM_TIME = {
-  beginStart: 500990,
-  finishStart: 700000000,
-  beginEnd: 500990,
-  finishEnd: 700000000,
-};
-
-const randomTime = getRandomTime();
-const getTime = (diff = 0) => new Date(randomTime + diff);
-const getStartTime = () => getTime(getRandomInteger(RANDOM_TIME.beginStart, RANDOM_TIME.finishStart));
-const getEndTime = () => getTime(getRandomInteger(RANDOM_TIME.beginEnd, RANDOM_TIME.finishEnd));
 
 const OfferOptionList = [
   {
@@ -214,40 +202,35 @@ const getSortItems = () => [
 ];
 
 // Генерирует моковые данные для собития event
-const createEvent = () => ({
-  eventType: getRendomItemOfArray(eventsTypes),
-  eventTime: {
-    start: Date.parse(getStartTime()),
-    end: Date.parse(getEndTime()),
-    get duration() {
-      return this.end - this.start;
-    }
-  },
-  eventPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
-  offerList: [{
-    info: getRendomItemOfArray(OfferOptionList),
-    offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
-    isActive: randomBoolean(),
-  },
+const createEvent = () => (
   {
-    info: getRendomItemOfArray(OfferOptionList),
-    offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
-    isActive: randomBoolean(),
-  },
-  ].slice(0, getRandomInteger(0, 3)),
-  eventCity: getRendomItemOfArray(eventCities),
-  offerDescription: getOfferArray(shuffleElemetsOfArray([...offerDescriptions])),
-  isFavorite: randomBoolean(),
-  sightseeing: getRendomItemOfArray(typesSightseeing),
-  sightseeingPhoto: [
-    `http://picsum.photos/300/150?r=${Math.random()}`,
-    `http://picsum.photos/300/150?r=${Math.random()}`,
-    `http://picsum.photos/300/150?r=${Math.random()}`,
-    `http://picsum.photos/300/150?r=${Math.random()}`,
-    `http://picsum.photos/300/150?r=${Math.random()}`,
-  ].slice(0, getRandomInteger(1, 6)),
-  transferEvent: [`Bus`, `Drive`, `Flight`, `Ship`, `Taxi`, `Train`, `Transport`],
-  activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
-});
+    eventType: getRendomItemOfArray(eventsTypes),
+    eventTime: getEventTime(),
+    eventPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
+    offerList: [{
+      info: getRendomItemOfArray(OfferOptionList),
+      offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
+      isActive: randomBoolean(),
+    },
+    {
+      info: getRendomItemOfArray(OfferOptionList),
+      offerPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
+      isActive: randomBoolean(),
+    },
+    ].slice(0, getRandomInteger(0, 3)),
+    eventCity: getRendomItemOfArray(eventCities),
+    offerDescription: getOfferArray(shuffleElemetsOfArray([...offerDescriptions])),
+    isFavorite: randomBoolean(),
+    sightseeing: getRendomItemOfArray(typesSightseeing),
+    sightseeingPhoto: [
+      `http://picsum.photos/300/150?r=${Math.random()}`,
+      `http://picsum.photos/300/150?r=${Math.random()}`,
+      `http://picsum.photos/300/150?r=${Math.random()}`,
+      `http://picsum.photos/300/150?r=${Math.random()}`,
+      `http://picsum.photos/300/150?r=${Math.random()}`,
+    ].slice(0, getRandomInteger(1, 6)),
+    transferEvent: [`Bus`, `Drive`, `Flight`, `Ship`, `Taxi`, `Train`, `Transport`],
+    activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
+  });
 
 export {createEvent, getSortItems, getTripTabs, getFilters};

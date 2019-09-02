@@ -9,6 +9,11 @@ const Unit = {
   second: 1000
 };
 
+const RANDOM_TIME = {
+  begin: 10000,
+  finish: 100000000,
+};
+
 /** Функция возращает случайный элемент массива
  *
  * @param {array} array массив
@@ -65,7 +70,7 @@ const shuffleElemetsOfArray = (array) => {
 const addFirstZero = (value) => (value < 10 ? `0` : ``) + value;
 
 // Функция возращает случайную дату в переделах недели
-const getRandomTime = () => Date.now() + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
+const getRandomTime = () => Date.now() + getRandomInteger(RANDOM_TIME.begin, RANDOM_TIME.finish) + Math.floor(Math.random() * Unit.week) * Unit.day * Unit.hour * Unit.minute * Unit.second;
 
 // Функция рассчитывает разницу во времени между начальной и конечной датами.
 const formatTime = (dateInfo) => {
@@ -74,9 +79,22 @@ const formatTime = (dateInfo) => {
   let hour = Math.floor(dateInfo / Unit.second / Unit.hour / Unit.minute) % Unit.day;
   let minute = Math.floor(dateInfo / Unit.second / Unit.hour) % Unit.minute;
   day = day >= 1 ? `${addFirstZero(day)}D` : ``;
-  hour = hour >= 1 ? `${hour}H` : ``;
+  hour = hour >= 1 || day >= 1 ? `${hour}H` : ``;
   minute = minute ? `${addFirstZero(minute)}M` : ``;
   return `${day} ${hour} ${minute}`;
+};
+
+// Функция возращает объект с данными начала,  конца и продолжительности собития.
+const getEventTime = () => {
+  const start = getRandomTime();
+  const end = start + getRandomInteger(RANDOM_TIME.begin, RANDOM_TIME.finish);
+  const duration = end - start;
+
+  return {
+    start,
+    end,
+    duration
+  };
 };
 
 export {getOfferArray,
@@ -86,6 +104,7 @@ export {getOfferArray,
   getRendomItemOfArray,
   getRandomInteger,
   formatTime,
-  getRandomTime
+  getRandomTime,
+  getEventTime
 };
 

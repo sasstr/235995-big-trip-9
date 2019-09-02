@@ -1,6 +1,6 @@
 const makeRouteInformationTemplate = (totalPrice, citiesArray, days) => `<div class="trip-info__main">
   <h1 class="trip-info__title">${citiesArray.length < 3 ?
-    `${citiesArray[0]} --- ${citiesArray[citiesArray.length - 1]}` :
+    `${citiesArray[0]} &nbsp;&mdash;&nbsp; ${citiesArray[citiesArray.length - 1]}` :
     `${citiesArray[0]}&mdash; ... &mdash;${citiesArray[citiesArray.length - 1]}`}</h1>
 
   <p class="trip-info__dates">${new Date(+days[0][0]).toLocaleString(`en-GB`, {
