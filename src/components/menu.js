@@ -1,6 +1,5 @@
-const getMenu = () => `<nav class="trip-controls__trip-tabs  trip-tabs">
-    <a class="trip-tabs__btn  trip-tabs__btn--active" href="#">Table</a>
-    <a class="trip-tabs__btn" href="#">Stats</a>
-  </nav>`;
+const makeMenuTemplate = (tripTabs) => `<nav class="trip-controls__trip-tabs  trip-tabs">
+    ${tripTabs.map((tab) => `<a class="trip-tabs__btn ${tab.isActive}" href="#">${tab.name}</a>`.trim()).join(``)}
+  </nav>`.trim();
 
-export {getMenu};
+export {makeMenuTemplate};
