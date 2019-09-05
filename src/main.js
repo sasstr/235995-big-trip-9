@@ -1,9 +1,9 @@
-import {makeMenuTemplate} from './components/menu';
+import Menu from './components/menu';
 import {createEvent, getSortItems, getTripTabs, getFilters} from './components/data';
-import {makeDaysTemplate} from './components/trip-days';
-import {makeFiltersTemplate} from './components/filters';
-import {makeSortFormTemplate} from './components/sort';
-import {makeRouteInformationTemplate} from './components/route-information';
+import TripDays from './components/trip-days';
+import Filters from './components/filters';
+import Sort from './components/sort';
+import RouteInformation from './components/route-information';
 
 const EVENT_COUNT = 8;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
@@ -28,7 +28,7 @@ const unsortedDays = eventsDataArray.reduce((acc, it) =>{
   acc[dt].push(it);
   return acc;
 }, {});
-
+// Получаем массив отсортированных дней с событиями.
 const daysSorted = Object.entries(unsortedDays)
                           .sort((a, b) => {
                             return a[0] - b[0];

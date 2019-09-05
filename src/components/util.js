@@ -97,6 +97,13 @@ const getEventTime = () => {
   };
 };
 
+// Функция создает DOM элемент DIV и в него помещает переданную разметку.
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement.firstChild;
+};
+
 export {getOfferArray,
   shuffleElemetsOfArray,
   randomBoolean,
@@ -105,6 +112,7 @@ export {getOfferArray,
   getRandomInteger,
   formatTime,
   getRandomTime,
-  getEventTime
+  getEventTime,
+  createElement
 };
 
