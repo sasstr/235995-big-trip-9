@@ -31,7 +31,9 @@ export default class TripDays {
         </div>
         <ul class="trip-events__list">
           ${day[1].sort((a, b) => (+a.eventTime.start) - (+b.eventTime.start))
-               .map((event) => (day[1][index] === event && index === 0) ? getEditCard(event) : getEventItem(event))}
+               .map((event) => (day[1][index] === event && index === 0) ?
+                 getEditCard(event) :
+                 getEventItem(event))}
 
         </ul>
         </li>`)}

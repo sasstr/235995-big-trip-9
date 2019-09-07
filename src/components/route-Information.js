@@ -24,7 +24,7 @@ export default class RouteInformation {
     `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[this._citiesArray.length - 1]}` :
     `${this._citiesArray[0]}&mdash; ... &mdash;${this._citiesArray[this._citiesArray.length - 1]}`}</h1>
 
-    <p class="trip-info__dates">${new Date(+days[0][0]).toLocaleString(`en-GB`, {
+    <p class="trip-info__dates">${new Date(+this._days[0][0]).toLocaleString(`en-GB`, {
     month: `short`,
     day: `2-digit`
   })}&nbsp;&mdash;&nbsp;${new Date(+this._days[this._days.length - 1][0]).toLocaleString(`en-GB`, {
