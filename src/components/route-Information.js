@@ -18,11 +18,15 @@ export default class RouteInformation {
     this._element = null;
   }
 
+  _isRoute(citiesAmount) {
+    return citiesAmount < 3 ?
+      `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[citiesAmount - 1]}` :
+      `${this._citiesArray[0]}&mdash; ... &mdash;${this._citiesArray[citiesAmount - 1]}`;
+  }
+
   getTemplate() {
     return `<div class="trip-info__main">
-    <h1 class="trip-info__title">${this._citiesArray.length < 3 ?
-    `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[this._citiesArray.length - 1]}` :
-    `${this._citiesArray[0]}&mdash; ... &mdash;${this._citiesArray[this._citiesArray.length - 1]}`}</h1>
+    <h1 class="trip-info__title">${this._isRoute(this._citiesArray.length)}</h1>
 
     <p class="trip-info__dates">${new Date(+this._days[0][0]).toLocaleString(`en-GB`, {
     month: `short`,

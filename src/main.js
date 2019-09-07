@@ -4,14 +4,12 @@ import Menu from './components/menu';
 import TripDays from './components/trip-days';
 import Filters from './components/filters';
 import Sort from './components/sort';
-/* import EventItem from './components/event-item';
-import EditEvent from './components/edit-event'; */
 import RouteInformation from './components/route-information';
 
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
 const sort = new Sort(getSortItems());
-const EVENT_COUNT = 3;
+const EVENT_COUNT = 5;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return new Array(eventsNumberOnPage).fill(``).map(makeEventData);
 };
@@ -32,7 +30,7 @@ const daysSorted = Object.entries(unsortedDays)
                           .sort((a, b) => {
                             return a[0] - b[0];
                           });
-console.log(daysSorted);
+
 const tripDays = new TripDays(daysSorted);
 
 // Оставляем в массиве городов только те что не повторились подряд.
@@ -46,10 +44,10 @@ const getRouteCities = (eventsArray) => {
   }
   return cities;
 };
-console.log(getFilters());
+
 // Считаем общую стоимость поездки
 const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
-console.log(totalPrice);
+
 const routeInformation = new RouteInformation(totalPrice, getRouteCities(eventsDataArray), daysSorted);
 
 const tripInfo = document.querySelector(`.trip-info`);

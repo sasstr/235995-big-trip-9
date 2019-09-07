@@ -74,9 +74,9 @@ export default class TripDays {
         </div>
         <ul class="trip-events__list">
           ${this._days.map((dayEvent) => dayEvent[1]
-            .map((event) => makeEventTemplate(event)))}
+            .map((event) => makeEventTemplate(event))).join(``)}
         </ul>
-        </li>`)}
+        </li>`).join(``)}
       </ul>`.trim();
   }
 }

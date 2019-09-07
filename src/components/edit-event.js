@@ -109,8 +109,7 @@ export default class EditEvent {
         <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
         <div class="event__available-offers">
-        ${this._offerList.map((offer) => `
-          <div class="event__offer-selector">
+        ${this._offerList.map((offer) => `<div class="event__offer-selector">
             <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offer.info.id === undefined ? `` : offer.info.id}-1"
             type="checkbox" name="event-offer-${offer.info.id === undefined ? `` : offer.info.id}" ${offer.info.isActive ? `` : `checked`} >
             <label class="event__offer-label" for="event-offer-${offer.info.id === undefined ? `` : offer.info.id}-1">
