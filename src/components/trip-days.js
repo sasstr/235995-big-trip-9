@@ -1,6 +1,49 @@
-import {getEditCard} from './edit-event';
-import {getEventItem} from './event-item';
 import {createElement} from './util';
+import EventItem from './event-item';
+import EditEvent from './edit-event';
+
+const makeEventTemplate = (eventData) => {
+  const tripContainer = document.querySelector(`.trip-events`);
+  const event = new EventItem(eventData);
+  const eventEdit = new EditEvent(eventData);
+
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
+
+  event.getElement()
+    .querySelector(`.event__rollup-btn`)
+    .addEventListener(`click`, () => {
+      tripContainer.replaceChild(eventEdit.getElement(), event.getElement());
+      document.addEventListener(`keydown`, onEscKeyDown);
+    });
+
+  eventEdit.getElement().querySelectorAll(`.event__input`)
+    .forEach((item) => {
+      item.addEventListener(`focus`, () => {
+        document.removeEventListener(`keydown`, onEscKeyDown);
+      });
+    });
+
+  eventEdit.getElement().querySelectorAll(`.event__input`)
+    .forEach((item) => {
+      item.addEventListener(`blur`, () => {
+        document.addEventListener(`keydown`, onEscKeyDown);
+      });
+    });
+
+  eventEdit.getElement()
+    .querySelector(`.event__save-btn`)
+    .addEventListener(`click`, () => {
+      tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    });
+
+  return event.getTemplate();
+};
 
 export default class TripDays {
   constructor(days) {
@@ -30,11 +73,8 @@ export default class TripDays {
   })}</time>
         </div>
         <ul class="trip-events__list">
-          ${day[1].sort((a, b) => (+a.eventTime.start) - (+b.eventTime.start))
-               .map((event) => (day[1][index] === event && index === 0) ?
-                 getEditCard(event) :
-                 getEventItem(event))}
-
+          ${this._days.map((dayEvent) => dayEvent[1]
+            .map((event) => makeEventTemplate(event)))}
         </ul>
         </li>`)}
       </ul>`.trim();

@@ -140,14 +140,17 @@ const getFilters = () => [
   {
     id: `everything`,
     title: `Everything`,
+    isChecked: true,
   },
   {
     id: `future`,
     title: `Future`,
+    isChecked: false,
   },
   {
     id: `past`,
     title: `Past`,
+    isChecked: false,
   },
 ];
 

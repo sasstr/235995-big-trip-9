@@ -159,7 +159,6 @@ export {getOfferArray,
   createElement,
   render,
   unrender,
-  getEventDayDate,
-  Position
+  getEventDayDate
 };
 
