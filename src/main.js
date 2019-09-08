@@ -48,12 +48,21 @@ const getRouteCities = (eventsArray) => {
   }
   return cities;
 };
-console.log(eventsDataArray);
+
+const getTotalPrice = (eventsData) => {
+  const currentArray = [];
+  eventsData.map((event) => {
+    if (event.offerList.length > 0) {
+      event.offerList.forEach((offer) => currentArray.push(offer.offerPrice));
+    }
+  });
+  return currentArray.reduce((sum, curr) => sum + curr, 0);
+};
+const totalOfferPrice = getTotalPrice(eventsDataArray);
 // Считаем общую стоимость поездки
-const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
-const offersPrice = eventsDataArray.map((it, index) => it.offerList[index].offerPrice ? it.offerList[index].offerPrice : 0).reduce((sum, current) => sum + current, 0);
+const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0) + totalOfferPrice;
 const price = new TotalPrice(totalPrice);
-const routeInformation = new RouteInformation(totalPrice, getRouteCities(eventsDataArray), daysSorted);
+const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), daysSorted);
 
 const tripInfo = document.querySelector(`.trip-info`);
 

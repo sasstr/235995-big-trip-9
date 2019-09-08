@@ -18,8 +18,7 @@ export default class RouteInformation {
   }
 
   _isRoute(citiesAmount) {
-    return citiesAmount < 3 ?
-      `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[citiesAmount - 1]}` :
+    return citiesAmount < 3 ? `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[citiesAmount - 1]}` :
       `${this._citiesArray[0]}&mdash; ... &mdash;${this._citiesArray[citiesAmount - 1]}`;
   }
 
