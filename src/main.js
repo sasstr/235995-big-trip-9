@@ -1,5 +1,8 @@
 import {render, getEventDayDate} from './components/util';
-import {createEvent, getSortItems, getTripTabs, getFilters} from './components/data';
+import {createEvent,
+  getSortItems,
+  getTripTabs,
+  getFilters} from './components/data';
 import Menu from './components/menu';
 import TotalPrice from './components/total-price';
 import TripDays from './components/trip-days';
@@ -12,11 +15,13 @@ const filters = new Filters(getFilters());
 const sort = new Sort(getSortItems());
 const EVENT_COUNT = 9;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
-  return new Array(eventsNumberOnPage).fill(``).map(makeEventData);
+  return new Array(eventsNumberOnPage)
+                  .fill(``)
+                  .map(makeEventData);
 };
-// eventsArray(eventsNumberOnPage).fill('').map(makeEventData)
+// Создаем массив с моковыми данными.
 const eventsDataArray = createEventsMockArray(createEvent, EVENT_COUNT);
-
+/* console.log(eventsDataArray); */
 // сортировать ивенты до сортировки по дням.
 const sortedEventsData = eventsDataArray.sort((a, b) => a.eventTime.start - b.eventTime.start);
 
@@ -48,7 +53,7 @@ const getRouteCities = (eventsArray) => {
   }
   return cities;
 };
-
+// Функция считает общую сумму оферов и ивентов.
 const getTotalPrice = (eventsData) => {
   const currentArray = [];
   eventsData.map((event) => {
@@ -56,11 +61,12 @@ const getTotalPrice = (eventsData) => {
       event.offerList.forEach((offer) => currentArray.push(offer.offerPrice));
     }
   });
-  return currentArray.reduce((sum, curr) => sum + curr, 0);
+  const eventsPrice = eventsData.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0);
+  return currentArray.reduce((sum, curr) => sum + curr, 0) + eventsPrice;
 };
-const totalOfferPrice = getTotalPrice(eventsDataArray);
+
 // Считаем общую стоимость поездки
-const totalPrice = eventsDataArray.map((it) => it.eventPrice).reduce((sum, current) => sum + current, 0) + totalOfferPrice;
+const totalPrice = getTotalPrice(eventsDataArray);
 const price = new TotalPrice(totalPrice);
 const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), daysSorted);
 
@@ -77,4 +83,4 @@ render(tripControl, filters.getElement());
 const tripEvents = document.querySelector(`.trip-events`);
 
 render(tripEvents, sort.getElement());
-render(tripEvents, tripDays.getElement(daysSorted));
+render(tripEvents, tripDays.getElement());

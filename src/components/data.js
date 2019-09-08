@@ -236,4 +236,9 @@ const createEvent = () => (
     activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
   });
 
-export {createEvent, getSortItems, getTripTabs, getFilters};
+export {
+  createEvent,
+  getSortItems,
+  getTripTabs,
+  getFilters
+};

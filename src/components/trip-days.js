@@ -1,11 +1,11 @@
 import {createElement} from './util';
 import EventItem from './event-item';
-import EditEvent from './edit-event';
-
+import EventEdit from './event-edit';
+const tripContainer = document.querySelector(`.trip-events__list`);
 const makeEventTemplate = (eventData) => {
-  const tripContainer = document.querySelector(`.trip-events`);
+
   const event = new EventItem(eventData);
-  const eventEdit = new EditEvent(eventData);
+  const eventEdit = new EventEdit(eventData);
 
   const onEscKeyDown = (evt) => {
     if (evt.key === `Escape` || evt.key === `Esc`) {
@@ -36,12 +36,19 @@ const makeEventTemplate = (eventData) => {
     });
 
   eventEdit.getElement()
-    .querySelector(`.event__save-btn`)
+    .querySelector(`.event__rollup-btn`)
     .addEventListener(`click`, () => {
       tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
       document.removeEventListener(`keydown`, onEscKeyDown);
     });
 
+  eventEdit.getElement()
+  .querySelector(`.event__save-btn`)
+  .addEventListener(`submit`, () => {
+    tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
+  /*render(tripContainer, event.getElement());*/
   return event.getTemplate();
 };
 

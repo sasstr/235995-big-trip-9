@@ -1,13 +1,20 @@
 import {formatTime, createElement} from './util';
 
 export default class EventItem {
-  constructor({eventType, eventTime, eventPrice, offerList, eventCity, activityEvent}) {
+  constructor({
+    activityEvent,
+    eventType,
+    eventTime,
+    eventPrice,
+    eventCity,
+    offerList,
+  }) {
+    this._activityEvent = activityEvent;
     this._eventType = eventType;
     this._eventTime = eventTime;
     this._eventPrice = eventPrice;
-    this._offerList = offerList;
     this._eventCity = eventCity;
-    this._activityEvent = activityEvent;
+    this._offerList = offerList;
   }
 
   getElement() {

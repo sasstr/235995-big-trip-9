@@ -147,18 +147,19 @@ const getEventDayDate = (date) => {
                                   .join(`, `));
 };
 
-export {getOfferArray,
-  shuffleElemetsOfArray,
-  randomBoolean,
-  randomOptionInteger,
+export {
+  createElement,
+  formatTime,
+  getOfferArray,
   getRendomItemOfArray,
   getRandomInteger,
-  formatTime,
   getRandomTime,
   getEventTime,
-  createElement,
+  getEventDayDate,
+  randomBoolean,
+  randomOptionInteger,
   render,
+  shuffleElemetsOfArray,
   unrender,
-  getEventDayDate
 };
 

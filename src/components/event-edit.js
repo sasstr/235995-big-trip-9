@@ -1,25 +1,26 @@
 import {createElement} from './util';
 
-export default class EditEvent {
-  constructor({eventType,
+export default class EventEdit {
+  constructor({
+    activityEvent,
+    eventType,
     eventTime,
     eventPrice,
+    eventCity,
     offerList,
     offerDescription,
     sightseeingPhoto,
-    eventCity,
     transferEvent,
-    activityEvent}) {
-
+  }) {
+    this._activityEvent = activityEvent;
     this._eventType = eventType;
     this._eventTime = eventTime;
     this._eventPrice = eventPrice;
+    this._eventCity = eventCity;
     this._offerList = offerList;
     this._offerDescription = offerDescription;
     this._sightseeingPhoto = sightseeingPhoto;
-    this._eventCity = eventCity;
     this._transferEvent = transferEvent;
-    this._activityEvent = activityEvent;
   }
 
   getElement() {
