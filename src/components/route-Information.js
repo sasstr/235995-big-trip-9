@@ -1,8 +1,7 @@
 import {createElement} from './util';
 
 export default class RouteInformation {
-  constructor(totalPrice, citiesArray, days) {
-    this._totalPrice = totalPrice;
+  constructor(citiesArray, days) {
     this._citiesArray = citiesArray;
     this._days = days;
   }
@@ -34,9 +33,6 @@ export default class RouteInformation {
   })}&nbsp;&mdash;&nbsp;${new Date(+this._days[this._days.length - 1][0]).toLocaleString(`en-GB`, {
   day: `2-digit`
 })}</p>
-    </div>
-    <p class="trip-info__cost">
-      Total: &euro;&nbsp;<span class="trip-info__cost-value">${this._totalPrice}</span>
-    </p>`.trim();
+    </div>`.trim();
   }
 }

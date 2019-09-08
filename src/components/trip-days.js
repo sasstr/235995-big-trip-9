@@ -69,14 +69,13 @@ export default class TripDays {
           <time class="day__date" datetime="${new Date(+day[0]).toISOString().slice(0, 10)}">
           ${new Date(+day[0]).toLocaleString(`en-GB`, {
     month: `short`,
-    day: `2-digit`
-  })}</time>
+    day: `2-digit`})}
+        </time>
         </div>
         <ul class="trip-events__list">
-          ${this._days.map((dayEvent) => dayEvent[1]
-            .map((event) => makeEventTemplate(event))).join(``)}
+          ${day[1].map((dayEvent) => makeEventTemplate(dayEvent)).join(``)}
         </ul>
-        </li>`).join(``)}
+        </li>`.trim()).join(``)}
       </ul>`.trim();
   }
 }

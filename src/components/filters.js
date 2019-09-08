@@ -17,8 +17,7 @@ export default class Filters {
   }
 
   getTemplate() {
-    return `<h2 class="visually-hidden">Filter events</h2>
-  <form class="trip-filters" action="#" method="get">
+    return `<form class="trip-filters" action="#" method="get">
     ${this._filters.map((filter) => `<div class="trip-filters__filter">
       <input id="filter-${filter.id}" class="trip-filters__filter-input  visually-hidden"
       type="radio" name="trip-filter" value="${filter.id}" ${filter.isChecked ? ` checked` : ``}>
