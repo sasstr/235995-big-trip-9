@@ -68,6 +68,7 @@ const getTotalPrice = (eventsData) => {
 // Считаем общую стоимость поездки
 const totalPrice = getTotalPrice(eventsDataArray);
 const price = new TotalPrice(totalPrice);
+
 const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), daysSorted);
 
 const tripInfo = document.querySelector(`.trip-info`);
