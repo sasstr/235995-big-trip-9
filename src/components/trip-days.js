@@ -1,9 +1,8 @@
-import {createElement} from './util';
+import {createElement, render} from './util';
 import EventItem from './event-item';
 import EventEdit from './event-edit';
-const tripContainer = document.querySelector(`.trip-events__list`);
+const tripContainer = document.querySelector(`.trip-events`);
 const makeEventTemplate = (eventData) => {
-
   const event = new EventItem(eventData);
   const eventEdit = new EventEdit(eventData);
 
@@ -48,8 +47,8 @@ const makeEventTemplate = (eventData) => {
     tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
     document.addEventListener(`keydown`, onEscKeyDown);
   });
-  /*render(tripContainer, event.getElement());*/
-  return event.getTemplate();
+  render(tripContainer, event.getElement());
+  /* return event.getTemplate(); */
 };
 
 export default class TripDays {
