@@ -2,6 +2,7 @@ import {createElement} from './util';
 
 export default class Filters {
   constructor(filters) {
+    this._element = null;
     this._filters = filters;
   }
 

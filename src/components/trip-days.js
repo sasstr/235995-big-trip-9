@@ -6,6 +6,7 @@ import Day from './day';
 export default class TripDays {
   constructor(days) {
     this._days = days;
+    this._element = null;
   }
 
   removeElement() {

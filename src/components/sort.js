@@ -2,6 +2,7 @@ import {createElement} from './util';
 
 export default class Sort {
   constructor(sortData) {
+    this._element = null;
     this._sortData = sortData;
   }
 

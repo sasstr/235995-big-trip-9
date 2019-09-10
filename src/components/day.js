@@ -3,6 +3,7 @@ import {createElement} from './util';
 export default class Day {
   constructor(day, index) {
     this._day = day;
+    this._element = null;
     this._index = index;
   }
   getElement() {

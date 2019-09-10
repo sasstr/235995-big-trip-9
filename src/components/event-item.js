@@ -9,6 +9,7 @@ export default class EventItem {
     offerList,
   }) {
     this._activityEvent = activityEvent;
+    this._element = null;
     this._eventType = eventType;
     this._eventTime = eventTime;
     this._eventPrice = eventPrice;

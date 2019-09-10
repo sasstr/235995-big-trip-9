@@ -14,6 +14,7 @@ export default class EventEdit {
     transferEvent,
   }) {
     this._activityEvent = activityEvent;
+    this._element = null;
     this._eventID = eventID;
     this._eventType = eventType;
     this._eventTime = eventTime;

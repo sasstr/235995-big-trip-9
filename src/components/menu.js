@@ -2,6 +2,7 @@ import {createElement} from './util';
 
 export default class Menu {
   constructor(tripTabs) {
+    this._element = null;
     this._tripTabs = tripTabs;
   }
 

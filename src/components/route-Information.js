@@ -4,6 +4,7 @@ export default class RouteInformation {
   constructor(citiesArray, days) {
     this._citiesArray = citiesArray;
     this._days = days;
+    this._element = null;
   }
 
   getElement() {
