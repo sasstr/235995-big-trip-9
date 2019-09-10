@@ -19,9 +19,10 @@ const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
                   .fill(``)
                   .map(makeEventData);
 };
+
 // Создаем массив с моковыми данными.
 const eventsDataArray = createEventsMockArray(createEvent, EVENT_COUNT);
-/* console.log(eventsDataArray); */
+
 // сортировать ивенты до сортировки по дням.
 const sortedEventsData = eventsDataArray.sort((a, b) => a.eventTime.start - b.eventTime.start);
 

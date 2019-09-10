@@ -19,6 +19,13 @@ const Position = {
   BEFOREEND: `beforeend`
 };
 
+// Функция создает DOM элемент DIV и в него помещает переданную разметку.
+const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement.firstChild;
+};
+
 /**
  * Функция рендерит разметку.
  * @param {node} container элемент в который добавляется разметка из cb.
@@ -132,12 +139,6 @@ const getEventTime = () => {
   };
 };
 
-// Функция создает DOM элемент DIV и в него помещает переданную разметку.
-const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-  return newElement.firstChild;
-};
 
 // функция возращает таймстэмп без часов минут и секунд с милисекундами
 const getEventDayDate = (date) => {

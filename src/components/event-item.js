@@ -1,8 +1,7 @@
 import {formatTime, createElement} from './util';
 
 export default class EventItem {
-  constructor({
-    activityEvent,
+  constructor({activityEvent,
     eventType,
     eventTime,
     eventPrice,
@@ -29,7 +28,8 @@ export default class EventItem {
   }
 
   getTemplate() {
-    return `<div class="event">
+    return `<li class="trip-events__item">
+    <div class="event">
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="${this._eventType.icon}" alt="Event type icon">
     </div>
@@ -61,6 +61,7 @@ export default class EventItem {
     <button class="event__rollup-btn" type="button">
       <span class="visually-hidden">Open event</span>
     </button>
-  </div>`.trim();
+  </div>
+  </li>`.trim();
   }
 }

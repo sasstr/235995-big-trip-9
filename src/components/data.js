@@ -205,8 +205,9 @@ const getSortItems = () => [
 ];
 
 // Генерирует моковые данные для собития event
-const createEvent = () => (
+const createEvent = (_, index) => (
   {
+    eventID: index + 1,
     eventType: getRendomItemOfArray(eventsTypes),
     eventTime: getEventTime(),
     eventPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
