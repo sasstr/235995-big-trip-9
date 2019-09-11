@@ -48,7 +48,7 @@ export default class RouteInformation {
   }
 
   _isRoute(citiesAmount = 0) {
-    if (!citiesAmount || citiesAmount === 0) {
+    if (citiesAmount === 0) {
       return ``;
     }
     return citiesAmount < 3 ? `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[citiesAmount - 1]}` :
@@ -59,7 +59,7 @@ export default class RouteInformation {
     return `<div class="trip-info__main">
     <h1 class="trip-info__title">${this._isRoute(this._citiesArray.length)}</h1>
 
-    <p class="trip-info__dates">${this._isStartDate(+this._days)}&nbsp;&mdash;&nbsp;${this._isEndDate(this._days)}</p>
+    <p class="trip-info__dates">${this._isStartDate(+this._days)}${this._isEndDate(this._days)}</p>
     </div>`.trim();
   }
 }

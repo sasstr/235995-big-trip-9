@@ -10,6 +10,7 @@ import Filters from './components/filters';
 import Sort from './components/sort';
 import RouteInformation from './components/route-information';
 import NoPoint from './components/no-point';
+import ButtonNewEvent from './components/button-new-event';
 
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
@@ -23,7 +24,7 @@ const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
 
 // Создаем массив с моковыми данными.
 const eventsDataArray = createEventsMockArray(createEvent, EVENT_COUNT);
-
+const buttonNewEvent = new ButtonNewEvent(eventsDataArray.length);
 // сортировать ивенты до сортировки по дням.
 const sortedEventsData = eventsDataArray.sort((a, b) => a.eventTime.start - b.eventTime.start);
 
@@ -83,7 +84,9 @@ render(tripInfo, routeInformation.getElement());
 render(tripInfo, price.getElement());
 
 const tripControl = document.querySelector(`.trip-controls`);
+const tripMain = document.querySelector(`.trip-main`);
 
+render(tripMain, buttonNewEvent.getElement());
 render(tripControl, menu.getElement());
 render(tripControl, filters.getElement());
 
