@@ -9,6 +9,7 @@ import TripDays from './components/trip-days';
 import Filters from './components/filters';
 import Sort from './components/sort';
 import RouteInformation from './components/route-information';
+import NoPoint from './components/no-point';
 
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
@@ -88,5 +89,13 @@ render(tripControl, filters.getElement());
 
 const tripEvents = document.querySelector(`.trip-events`);
 
-render(tripEvents, sort.getElement());
+if (eventsDataArray && eventsDataArray.length > 0) {
+  render(tripEvents, sort.getElement());
+}
+
+if (!eventsDataArray || eventsDataArray.length === 0) {
+  const noPoint = new NoPoint();
+  render(tripEvents, noPoint.getElement());
+}
+
 render(tripEvents, tripDays.getElement());
