@@ -1,7 +1,7 @@
 import {createElement} from './util';
 
 export default class RouteInformation {
-  constructor(citiesArray, days) {
+  constructor(citiesArray = [], days = []) {
     this._citiesArray = citiesArray;
     this._days = days;
     this._element = null;
@@ -18,7 +18,39 @@ export default class RouteInformation {
     this._element = null;
   }
 
-  _isRoute(citiesAmount) {
+  _isStartDate(routeDays) {
+    if (!routeDays || routeDays === 0) {
+      return ``;
+    }
+    return new Date(+routeDays[0][0]).toLocaleString(`en-GB`, {
+      month: `short`,
+      day: `2-digit`
+    });
+  }
+
+  _isStartDate(routeDays) {
+    if (!routeDays || routeDays === 0) {
+      return ``;
+    }
+    return new Date(+routeDays[0][0]).toLocaleString(`en-GB`, {
+      month: `short`,
+      day: `2-digit`
+    });
+  }
+
+  _isEndDate(routeDays) {
+    if (!routeDays || routeDays.length === 0) {
+      return ``;
+    }
+    return new Date(+routeDays[this._days.length - 1][0]).toLocaleString(`en-GB`, {
+      day: `2-digit`
+    });
+  }
+
+  _isRoute(citiesAmount = 0) {
+    if (!citiesAmount || citiesAmount === 0) {
+      return ``;
+    }
     return citiesAmount < 3 ? `${this._citiesArray[0]} &nbsp;&mdash;&nbsp; ${this._citiesArray[citiesAmount - 1]}` :
       `${this._citiesArray[0]}&mdash; ... &mdash;${this._citiesArray[citiesAmount - 1]}`;
   }
@@ -27,12 +59,7 @@ export default class RouteInformation {
     return `<div class="trip-info__main">
     <h1 class="trip-info__title">${this._isRoute(this._citiesArray.length)}</h1>
 
-    <p class="trip-info__dates">${new Date(+this._days[0][0]).toLocaleString(`en-GB`, {
-    month: `short`,
-    day: `2-digit`
-  })}&nbsp;&mdash;&nbsp;${new Date(+this._days[this._days.length - 1][0]).toLocaleString(`en-GB`, {
-  day: `2-digit`
-})}</p>
+    <p class="trip-info__dates">${this._isStartDate(+this._days)}&nbsp;&mdash;&nbsp;${this._isEndDate(this._days)}</p>
     </div>`.trim();
   }
 }

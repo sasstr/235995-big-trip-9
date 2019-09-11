@@ -13,7 +13,7 @@ import RouteInformation from './components/route-information';
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
 const sort = new Sort(getSortItems());
-const EVENT_COUNT = 9;
+const EVENT_COUNT = 0;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return new Array(eventsNumberOnPage)
                   .fill(``)
@@ -45,8 +45,12 @@ const tripDays = new TripDays(daysSorted);
 
 // Оставляем в массиве городов только те что не повторились подряд.
 const getRouteCities = (eventsArray) => {
+  if (!eventsArray || eventsArray.length === 0) {
+    return ``;
+  }
   const cities = [];
   cities.push(eventsArray[0].eventCity);
+
   for (let i = 0; i < eventsArray.length; i++) {
     if (i > 0 && eventsArray[i - 1].eventCity !== eventsArray[i].eventCity) {
       cities.push(eventsArray[i].eventCity);
