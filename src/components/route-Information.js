@@ -50,7 +50,7 @@ export default class RouteInformation extends AbstractComponent {
     return `<div class="trip-info__main">
     <h1 class="trip-info__title">${this._isRoute(this._citiesArray.length)}</h1>
 
-    <p class="trip-info__dates">${this._isStartDate(+this._days)}${this._isEndDate(this._days)}</p>
+    <p class="trip-info__dates">${this._isStartDate(this._days)}&nbsp;—&nbsp;${this._isEndDate(this._days)}</p>
     </div>`.trim();
   }
 }

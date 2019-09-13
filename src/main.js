@@ -3,6 +3,7 @@ import {createEvent,
   getSortItems,
   getTripTabs,
   getFilters} from './components/data';
+import TripController from './trip-controller';
 import Menu from './components/menu';
 import TotalPrice from './components/total-price';
 import TripDays from './components/trip-days';
@@ -102,3 +103,7 @@ if (!eventsDataArray || eventsDataArray.length === 0) {
 }
 
 render(tripEvents, tripDays.getElement());
+
+/* const tripController = new TripController(daysSorted, tripEvents);
+console.log(tripController);
+ TripController.init(); */
