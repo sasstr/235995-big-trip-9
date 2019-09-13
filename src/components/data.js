@@ -140,14 +140,17 @@ const getFilters = () => [
   {
     id: `everything`,
     title: `Everything`,
+    isChecked: true,
   },
   {
     id: `future`,
     title: `Future`,
+    isChecked: false,
   },
   {
     id: `past`,
     title: `Past`,
+    isChecked: false,
   },
 ];
 
@@ -202,8 +205,9 @@ const getSortItems = () => [
 ];
 
 // Генерирует моковые данные для собития event
-const createEvent = () => (
+const createEvent = (_, index) => (
   {
+    eventID: index + 1,
     eventType: getRendomItemOfArray(eventsTypes),
     eventTime: getEventTime(),
     eventPrice: getRandomInteger(PRICE_RANGE.min, PRICE_RANGE.max),
@@ -233,4 +237,9 @@ const createEvent = () => (
     activityEvent: [`Check-in`, `Restaurant`, `Sightseeing`],
   });
 
-export {createEvent, getSortItems, getTripTabs, getFilters};
+export {
+  createEvent,
+  getSortItems,
+  getTripTabs,
+  getFilters
+};

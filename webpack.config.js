@@ -11,7 +11,6 @@ module.exports = {
     contentBase: path.join(__dirname, `public`), // Где искать сборку
     publicPath: `http://localhost:8080/`, // Веб адрес сборки
     compress: true, // Сжатие
-    overlay: true, // Выводит ошибки на экране.
     watchContentBase: true
   }
 };
