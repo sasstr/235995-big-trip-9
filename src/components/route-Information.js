@@ -1,20 +1,11 @@
-import {createElement} from './util';
+import AbstractComponent from './abstract-component';
 
-export default class RouteInformation {
+export default class RouteInformation extends AbstractComponent {
   constructor(citiesArray = [], days = []) {
+    super();
+
     this._citiesArray = citiesArray;
     this._days = days;
-    this._element = null;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
     this._element = null;
   }
 

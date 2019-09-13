@@ -12,10 +12,10 @@ import RouteInformation from './components/route-information';
 import NoPoint from './components/no-point';
 import ButtonNewEvent from './components/button-new-event';
 
+const EVENT_COUNT = 5;
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
 const sort = new Sort(getSortItems());
-const EVENT_COUNT = 0;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return new Array(eventsNumberOnPage)
                   .fill(``)

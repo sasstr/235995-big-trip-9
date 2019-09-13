@@ -1,26 +1,27 @@
+import AbstractComponent from './abstract-component';
 import {createElement} from './util';
 import EventItem from './event-item';
 import EventEdit from './event-edit';
 import Day from './day';
-/* const tripContainer = document.querySelector(`.trip-events`); */
-export default class TripDays {
+export default class TripDays extends AbstractComponent {
   constructor(days) {
+    super();
+
     this._days = days;
-    this._element = null;
   }
 
   removeElement() {
     this._element = null;
   }
 
-  _makeEvent(eventMock, tripContainer) {
+  _makeEvent(eventMock) {
 
     const event = new EventItem(eventMock);
     const eventEdit = new EventEdit(eventMock);
 
     const onEscKeyDown = (evt) => {
       if (evt.key === `Escape` || evt.key === `Esc`) {
-        tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
+        eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
     };
@@ -28,7 +29,7 @@ export default class TripDays {
     event.getElement()
       .querySelector(`.event__rollup-btn`)
       .addEventListener(`click`, () => {
-        tripContainer.replaceChild(eventEdit.getElement(), event.getElement());
+        event.getElement().parentNode.replaceChild(eventEdit.getElement(), event.getElement());
         document.addEventListener(`keydown`, onEscKeyDown);
       });
 
@@ -49,14 +50,14 @@ export default class TripDays {
     eventEdit.getElement()
       .querySelector(`.event__rollup-btn`)
       .addEventListener(`click`, () => {
-        tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
+        eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       });
 
     eventEdit.getElement()
     .querySelector(`.event__save-btn`)
     .addEventListener(`submit`, () => {
-      tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
+      eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
       document.addEventListener(`keydown`, onEscKeyDown);
     });
     return event;

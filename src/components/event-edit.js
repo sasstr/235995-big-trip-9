@@ -1,6 +1,6 @@
-import {createElement} from './util';
+import AbstractComponent from './abstract-component';
 
-export default class EventEdit {
+export default class EventEdit extends AbstractComponent {
   constructor({
     activityEvent,
     eventID,
@@ -13,8 +13,9 @@ export default class EventEdit {
     sightseeingPhoto,
     transferEvent,
   }) {
+    super();
+
     this._activityEvent = activityEvent;
-    this._element = null;
     this._eventID = eventID;
     this._eventType = eventType;
     this._eventTime = eventTime;
@@ -24,17 +25,6 @@ export default class EventEdit {
     this._offerDescription = offerDescription;
     this._sightseeingPhoto = sightseeingPhoto;
     this._transferEvent = transferEvent;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {

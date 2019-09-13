@@ -1,20 +1,10 @@
-import {createElement} from './util';
+import AbstractComponent from './abstract-component';
 
-export default class ButtonNewEvent {
+export default class ButtonNewEvent extends AbstractComponent {
   constructor(eventsAmount) {
-    this._element = null;
+    super();
+
     this._eventsAmount = eventsAmount;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   _isDisabled() {
