@@ -10,10 +10,6 @@ export default class TripDays extends AbstractComponent {
     this._days = days;
   }
 
-  removeElement() {
-    this._element = null;
-  }
-
   _makeEvent(eventMock) {
 
     const event = new EventItem(eventMock);
