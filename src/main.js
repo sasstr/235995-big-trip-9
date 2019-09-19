@@ -1,21 +1,21 @@
-import {render, getEventDayDate} from './components/util';
+import {render, getSortedDays} from './components/util';
 import {createEvent,
   getSortItems,
   getTripTabs,
   getFilters} from './components/data';
+import TripController from './trip-controller';
 import Menu from './components/menu';
 import TotalPrice from './components/total-price';
-import TripDays from './components/trip-days';
 import Filters from './components/filters';
 import Sort from './components/sort';
 import RouteInformation from './components/route-information';
 import NoPoint from './components/no-point';
 import ButtonNewEvent from './components/button-new-event';
 
+const EVENT_COUNT = 5;
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
 const sort = new Sort(getSortItems());
-const EVENT_COUNT = 0;
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return new Array(eventsNumberOnPage)
                   .fill(``)
@@ -25,25 +25,6 @@ const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
 // Создаем массив с моковыми данными.
 const eventsDataArray = createEventsMockArray(createEvent, EVENT_COUNT);
 const buttonNewEvent = new ButtonNewEvent(eventsDataArray.length);
-// сортировать ивенты до сортировки по дням.
-const sortedEventsData = eventsDataArray.sort((a, b) => a.eventTime.start - b.eventTime.start);
-
-// Получаем массив неотсортированных дней с событиями.
-const unsortedDays = sortedEventsData.reduce((acc, it) =>{
-  const dt = getEventDayDate(it.eventTime.start);
-  if (!acc[dt]) {
-    acc[dt] = [];
-  }
-  acc[dt].push(it);
-  return acc;
-}, {});
-// Получаем массив отсортированных дней с событиями.
-const daysSorted = Object.entries(unsortedDays)
-                          .sort((a, b) => {
-                            return a[0] - b[0];
-                          });
-
-const tripDays = new TripDays(daysSorted);
 
 // Оставляем в массиве городов только те что не повторились подряд.
 const getRouteCities = (eventsArray) => {
@@ -76,7 +57,7 @@ const getTotalPrice = (eventsData) => {
 const totalPrice = getTotalPrice(eventsDataArray);
 const price = new TotalPrice(totalPrice);
 
-const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), daysSorted);
+const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), getSortedDays(eventsDataArray)/* daysSorted */);
 
 const tripInfo = document.querySelector(`.trip-info`);
 
@@ -101,4 +82,5 @@ if (!eventsDataArray || eventsDataArray.length === 0) {
   render(tripEvents, noPoint.getElement());
 }
 
-render(tripEvents, tripDays.getElement());
+const tripController = new TripController(eventsDataArray, tripEvents);
+tripController.init();

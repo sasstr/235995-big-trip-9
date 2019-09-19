@@ -1,32 +1,30 @@
-import {createElement} from './util';
+import AbstractComponent from './abstract-component';
 
-export default class Sort {
+export default class Sort extends AbstractComponent {
   constructor(sortData) {
-    this._element = null;
+    super();
+
     this._sortData = sortData;
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
+  _isSpan(item) {
+    if (item.tag === `span`) {
+      return `<span class="trip-sort__item  trip-sort__item--${item.name}">${item.label}</span>`.trim();
     }
-    return this._element;
+    return `<div class="trip-sort__item  trip-sort__item--${item.name}">
+    <input id="sort-${item.name}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${item.name}"
+    ${item.name === `event` ? `checked` : ``}>
+    <label class="trip-sort__btn" for="sort-event">${item.label}${item.svg}</label>
+  </div>`.trim();
   }
 
-  removeElement() {
-    this._element = null;
+  _makeSortList(sortItems) {
+    return sortItems.map((sortItem) => `${this._isSpan(sortItem)}`);
   }
 
   getTemplate() {
     return `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
-    ${this._sortData.map((sortItem) => `${sortItem.tag === `span` ?
-    `<span class="trip-sort__item  trip-sort__item--${sortItem.name}">${sortItem.label}</span>`.trim()
-    :
-    `<div class="trip-sort__item  trip-sort__item--${sortItem.name}">
-      <input id="sort-${sortItem.name}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${sortItem.name}"
-      ${sortItem.name === `event` ? `checked` : ``}>
-      <label class="trip-sort__btn" for="sort-event">${sortItem.label}${sortItem.svg}</label>
-    </div>`.trim() }`).join(``)}
+    ${this._makeSortList(this._sortData).join(``)}
     </form>`.trim();
   }
 }

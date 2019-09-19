@@ -1,64 +1,64 @@
+import AbstractComponent from './abstract-component';
 import {createElement} from './util';
 import EventItem from './event-item';
 import EventEdit from './event-edit';
 import Day from './day';
-/* const tripContainer = document.querySelector(`.trip-events`); */
-export default class TripDays {
+export default class TripDays extends AbstractComponent {
   constructor(days) {
+    super();
+
     this._days = days;
-    this._element = null;
   }
 
-  removeElement() {
-    this._element = null;
-  }
-
-  _makeEvent(eventMock, tripContainer) {
+  _makeEvent(eventMock) {
 
     const event = new EventItem(eventMock);
-    const eventEdit = new EventEdit(eventMock);
-
-    const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
-        tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      }
-    };
 
     event.getElement()
       .querySelector(`.event__rollup-btn`)
       .addEventListener(`click`, () => {
-        tripContainer.replaceChild(eventEdit.getElement(), event.getElement());
-        document.addEventListener(`keydown`, onEscKeyDown);
-      });
+        const eventEdit = new EventEdit(eventMock);
 
-    eventEdit.getElement().querySelectorAll(`.event__input`)
-      .forEach((item) => {
-        item.addEventListener(`focus`, () => {
+        const onEscKeyDown = (evt) => {
+          if (evt.key === `Escape` || evt.key === `Esc`) {
+            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
+            document.removeEventListener(`keydown`, onEscKeyDown);
+          }
+        };
+
+        event.getElement().parentNode.replaceChild(eventEdit.getElement(), event.getElement());
+        document.addEventListener(`keydown`, onEscKeyDown);
+
+        eventEdit.getElement().querySelectorAll(`.event__input`)
+        .forEach((item) => {
+          item.addEventListener(`focus`, () => {
+            document.removeEventListener(`keydown`, onEscKeyDown);
+          });
+        });
+
+        eventEdit.getElement().querySelectorAll(`.event__input`)
+          .forEach((item) => {
+            item.addEventListener(`blur`, () => {
+              document.addEventListener(`keydown`, onEscKeyDown);
+            });
+          });
+
+        eventEdit.getElement()
+        .querySelector(`.event__rollup-btn`)
+        .addEventListener(`click`, () => {
+          eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
           document.removeEventListener(`keydown`, onEscKeyDown);
         });
-      });
 
-    eventEdit.getElement().querySelectorAll(`.event__input`)
-      .forEach((item) => {
-        item.addEventListener(`blur`, () => {
+        eventEdit.getElement()
+        .querySelector(`.event__save-btn`)
+        .addEventListener(`submit`, () => {
+          eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
           document.addEventListener(`keydown`, onEscKeyDown);
         });
       });
 
-    eventEdit.getElement()
-      .querySelector(`.event__rollup-btn`)
-      .addEventListener(`click`, () => {
-        tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      });
 
-    eventEdit.getElement()
-    .querySelector(`.event__save-btn`)
-    .addEventListener(`submit`, () => {
-      tripContainer.replaceChild(event.getElement(), eventEdit.getElement());
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
     return event;
   }
 

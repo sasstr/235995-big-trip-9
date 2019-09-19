@@ -1,6 +1,7 @@
-import {formatTime, createElement} from './util';
+import {formatTime} from './util';
+import AbstractComponent from './abstract-component';
 
-export default class EventItem {
+export default class EventItem extends AbstractComponent {
   constructor({activityEvent,
     eventType,
     eventTime,
@@ -8,24 +9,14 @@ export default class EventItem {
     eventCity,
     offerList,
   }) {
+    super();
+
     this._activityEvent = activityEvent;
-    this._element = null;
     this._eventType = eventType;
     this._eventTime = eventTime;
     this._eventPrice = eventPrice;
     this._eventCity = eventCity;
     this._offerList = offerList;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {

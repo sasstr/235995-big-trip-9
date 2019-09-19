@@ -1,15 +1,8 @@
-import {createElement} from './util';
+import AbstractComponent from './abstract-component';
 
-export default class NoPoint {
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+export default class NoPoint extends AbstractComponent {
+  constructor() {
+    super();
   }
 
   getTemplate() {
