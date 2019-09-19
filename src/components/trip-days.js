@@ -13,49 +13,52 @@ export default class TripDays extends AbstractComponent {
   _makeEvent(eventMock) {
 
     const event = new EventItem(eventMock);
-    const eventEdit = new EventEdit(eventMock);
-
-    const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
-        eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      }
-    };
 
     event.getElement()
       .querySelector(`.event__rollup-btn`)
       .addEventListener(`click`, () => {
+        const eventEdit = new EventEdit(eventMock);
+
+        const onEscKeyDown = (evt) => {
+          if (evt.key === `Escape` || evt.key === `Esc`) {
+            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
+            document.removeEventListener(`keydown`, onEscKeyDown);
+          }
+        };
+
         event.getElement().parentNode.replaceChild(eventEdit.getElement(), event.getElement());
         document.addEventListener(`keydown`, onEscKeyDown);
-      });
 
-    eventEdit.getElement().querySelectorAll(`.event__input`)
-      .forEach((item) => {
-        item.addEventListener(`focus`, () => {
+        eventEdit.getElement().querySelectorAll(`.event__input`)
+        .forEach((item) => {
+          item.addEventListener(`focus`, () => {
+            document.removeEventListener(`keydown`, onEscKeyDown);
+          });
+        });
+
+        eventEdit.getElement().querySelectorAll(`.event__input`)
+          .forEach((item) => {
+            item.addEventListener(`blur`, () => {
+              document.addEventListener(`keydown`, onEscKeyDown);
+            });
+          });
+
+        eventEdit.getElement()
+        .querySelector(`.event__rollup-btn`)
+        .addEventListener(`click`, () => {
+          eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
           document.removeEventListener(`keydown`, onEscKeyDown);
         });
-      });
 
-    eventEdit.getElement().querySelectorAll(`.event__input`)
-      .forEach((item) => {
-        item.addEventListener(`blur`, () => {
+        eventEdit.getElement()
+        .querySelector(`.event__save-btn`)
+        .addEventListener(`submit`, () => {
+          eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
           document.addEventListener(`keydown`, onEscKeyDown);
         });
       });
 
-    eventEdit.getElement()
-      .querySelector(`.event__rollup-btn`)
-      .addEventListener(`click`, () => {
-        eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      });
 
-    eventEdit.getElement()
-    .querySelector(`.event__save-btn`)
-    .addEventListener(`submit`, () => {
-      eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
     return event;
   }
 

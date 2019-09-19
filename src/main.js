@@ -1,4 +1,4 @@
-import {render} from './components/util';
+import {render, getSortedDays} from './components/util';
 import {createEvent,
   getSortItems,
   getTripTabs,
@@ -57,7 +57,7 @@ const getTotalPrice = (eventsData) => {
 const totalPrice = getTotalPrice(eventsDataArray);
 const price = new TotalPrice(totalPrice);
 
-const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), TripController.getSortedDays(eventsDataArray)/* daysSorted */);
+const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), getSortedDays(eventsDataArray)/* daysSorted */);
 
 const tripInfo = document.querySelector(`.trip-info`);
 

@@ -148,6 +148,24 @@ const getEventDayDate = (date) => {
                                   .join(`, `));
 };
 
+// Получаем массив отсортированных дней с событиями.
+const getSortedDays = (events) => {
+  events = events.slice();
+  const sortedEventsData = events.sort((a, b) => a.eventTime.start - b.eventTime.start);
+  const unsortedDays = sortedEventsData.reduce((acc, it) => {
+    const dt = getEventDayDate(it.eventTime.start);
+    if (!acc[dt]) {
+      acc[dt] = [];
+    }
+    acc[dt].push(it);
+    return acc;
+  }, {});
+  return Object.entries(unsortedDays)
+  .sort((a, b) => {
+    return a[0] - b[0];
+  });
+};
+
 export {
   createElement,
   formatTime,
@@ -157,6 +175,7 @@ export {
   getRandomTime,
   getEventTime,
   getEventDayDate,
+  getSortedDays,
   randomBoolean,
   randomOptionInteger,
   render,
