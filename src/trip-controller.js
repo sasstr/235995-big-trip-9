@@ -21,6 +21,11 @@ export default class TripController {
                 .sort((a, b) => a.eventPrice - b.eventPrice);
   }
 
+  _renderDays(tripEventsElement) {
+    const tripDaysElements = new TripDays(getSortedDays(this._events));
+    render(tripEventsElement, tripDaysElements.getElement());
+  }
+
   // Функция слушатель события клик на элементах сортировки.
   _onSortLinkClick(evt) {
     evt.preventDefault();
@@ -42,8 +47,8 @@ export default class TripController {
         break;
       case `event`:
         const tripEvents = document.querySelector(`.trip-events`);
-        const tripDaysElements = new TripDays(getSortedDays(this._events));
-        render(tripEvents, tripDaysElements.getElement());
+        tripEvents.removeChild(tripDays);
+        this._renderDays(tripEvents);
         break;
     }
   }
@@ -55,7 +60,6 @@ export default class TripController {
     }
     const tripEventsSort = document.querySelector(`.trip-events__trip-sort`);
     tripEventsSort.addEventListener(`click`, (evt) => this._onSortLinkClick(evt));
-    const tripDaysElements = new TripDays(getSortedDays(this._events));
-    render(tripEvents, tripDaysElements.getElement());
+    this._renderDays(tripEvents);
   }
 }
