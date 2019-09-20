@@ -14,7 +14,7 @@ export default class Sort extends AbstractComponent {
     return `<div class="trip-sort__item  trip-sort__item--${item.name}">
     <input id="sort-${item.name}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${item.name}"
     ${item.name === `event` ? `checked` : ``}>
-    <label class="trip-sort__btn" for="sort-event">${item.label}${item.svg}</label>
+    <label class="trip-sort__btn" for="sort-event" data-sort="${item.name}">${item.label}${item.svg}</label>
   </div>`.trim();
   }
 
