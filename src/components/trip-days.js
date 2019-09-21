@@ -10,7 +10,7 @@ export default class TripDays extends AbstractComponent {
     this._days = days;
   }
 
-  _makeEvent(eventMock) {
+  static _makeEvent(eventMock) {
 
     const event = new EventItem(eventMock);
 
@@ -58,7 +58,6 @@ export default class TripDays extends AbstractComponent {
         });
       });
 
-
     return event;
   }
 
@@ -68,8 +67,9 @@ export default class TripDays extends AbstractComponent {
     const tripEventsList = createElement(`<ul class="trip-events__list">
 
     </ul>`);
-    dayInfo[1].forEach((eventInfo) => tripEventsList.appendChild(this._makeEvent(eventInfo, tripEventsList).getElement()));
+    dayInfo[1].forEach((eventInfo) => tripEventsList.appendChild(TripDays._makeEvent(eventInfo, tripEventsList).getElement()));
     dayElement.append(tripEventsList);
+
     return dayElement;
   }
 

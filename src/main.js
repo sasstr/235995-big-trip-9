@@ -1,13 +1,11 @@
 import {render, getSortedDays} from './components/util';
 import {createEvent,
-  getSortItems,
   getTripTabs,
   getFilters} from './components/data';
 import TripController from './trip-controller';
 import Menu from './components/menu';
 import TotalPrice from './components/total-price';
 import Filters from './components/filters';
-import Sort from './components/sort';
 import RouteInformation from './components/route-information';
 import NoPoint from './components/no-point';
 import ButtonNewEvent from './components/button-new-event';
@@ -15,7 +13,6 @@ import ButtonNewEvent from './components/button-new-event';
 const EVENT_COUNT = 5;
 const menu = new Menu(getTripTabs());
 const filters = new Filters(getFilters());
-const sort = new Sort(getSortItems());
 const createEventsMockArray = (makeEventData, eventsNumberOnPage) => {
   return new Array(eventsNumberOnPage)
                   .fill(``)
@@ -57,7 +54,7 @@ const getTotalPrice = (eventsData) => {
 const totalPrice = getTotalPrice(eventsDataArray);
 const price = new TotalPrice(totalPrice);
 
-const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), getSortedDays(eventsDataArray)/* daysSorted */);
+const routeInformation = new RouteInformation(getRouteCities(eventsDataArray), getSortedDays(eventsDataArray));
 
 const tripInfo = document.querySelector(`.trip-info`);
 
@@ -72,10 +69,6 @@ render(tripControl, menu.getElement());
 render(tripControl, filters.getElement());
 
 const tripEvents = document.querySelector(`.trip-events`);
-
-if (eventsDataArray && eventsDataArray.length > 0) {
-  render(tripEvents, sort.getElement());
-}
 
 if (!eventsDataArray || eventsDataArray.length === 0) {
   const noPoint = new NoPoint();
