@@ -1,24 +1,23 @@
 import {render, getSortedDays} from './components/util';
 import TripDays from './components/trip-days';
 import SortEvents from './components/sort-events';
-import {getSortItems} from './components/data';
 import Sort from './components/sort';
 
 export default class TripController {
   constructor(events, container) {
     this._container = container;
     this._events = events.slice();
-    this._sort = new Sort(getSortItems());
+    this._sort = new Sort();
   }
 
   _sortByTime() {
     return this._events.slice()
-                .sort((a, b) => a.eventTime.duration - b.eventTime.duration);
+                .sort((a, b) => b.eventTime.duration - a.eventTime.duration);
   }
 
   _sortByPrice() {
     return this._events.slice()
-                .sort((a, b) => a.eventPrice - b.eventPrice);
+                .sort((a, b) => b.eventPrice - a.eventPrice);
   }
 
   _renderDays(tripEventsElement) {
