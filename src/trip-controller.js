@@ -31,6 +31,7 @@ export default class TripController {
     if (evt.target.tagName !== `LABEL`) {
       return;
     }
+    evt.target.previousElementSibling.checked = true;
 
     const tripDays = document.querySelector(`.trip-days`);
     tripDays.innerHTML = ``;
