@@ -2,7 +2,7 @@ import {render, getSortedDays} from './components/util';
 import {createEvent,
   getTripTabs,
   getFilters} from './components/data';
-import TripController from './trip-controller';
+import TripController from './controllers/trip-controller';
 import Menu from './components/menu';
 import TotalPrice from './components/total-price';
 import Filters from './components/filters';

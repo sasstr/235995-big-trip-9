@@ -1,13 +1,37 @@
-import {render, getSortedDays} from './components/util';
-import TripDays from './components/trip-days';
-import SortEvents from './components/sort-events';
-import Sort from './components/sort';
+import {render, getSortedDays} from '../components/util';
+import TripDays from '../components/trip-days';
+import SortEvents from '../components/sort-events';
+import Sort from '../components/sort';
+import PointController from "./point-controller";
 
 export default class TripController {
   constructor(events, container) {
     this._container = container;
     this._events = events.slice();
+    this._onChangeView = this._onChangeView.bind(this);
+    this._onDataChange = this._onDataChange.bind(this);
+    this._subscriptions = [];
     this._sort = new Sort();
+  }
+
+  _renderEvent(event) {
+    const pointController = new PointController(this._container, event, this._onDataChange, this._onChangeView);
+    this._subscriptions.push(pointController.setDefaultView.bind(pointController));
+  }
+
+  _renderDays(tripEventsElement) {
+    const tripDaysElements = new TripDays(getSortedDays(this._events));
+    render(tripEventsElement, tripDaysElements.getElement());
+  }
+
+  _onDataChange(newData, oldData) {
+    this._events[this._events.findIndex((it2) => it2 === oldData)] = newData;
+
+    /* this._renderEvent(this._events); */
+  }
+
+  _onChangeView() {
+    this._subscriptions.forEach((it) => it());
   }
 
   _sortByTime() {
@@ -18,11 +42,6 @@ export default class TripController {
   _sortByPrice() {
     return this._events.slice()
                 .sort((a, b) => b.eventPrice - a.eventPrice);
-  }
-
-  _renderDays(tripEventsElement) {
-    const tripDaysElements = new TripDays(getSortedDays(this._events));
-    render(tripEventsElement, tripDaysElements.getElement());
   }
 
   // Функция слушатель события клик на элементах сортировки.
