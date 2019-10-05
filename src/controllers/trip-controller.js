@@ -20,8 +20,14 @@ export default class TripController {
                 .sort((a, b) => b.eventPrice - a.eventPrice);
   }
 
+  onEventChange(event, updatedEvent) {
+    const index = this._events.findIndex((currentEvent) => currentEvent === event);
+
+    this._events[index] = updatedEvent;
+  }
+
   _renderDays(tripEventsElement) {
-    const tripDaysElements = new TripDays(getSortedDays(this._events));
+    const tripDaysElements = new TripDays(getSortedDays(this._events), this.onEventChange.bind(this));
     render(tripEventsElement, tripDaysElements.getElement());
   }
 
@@ -51,12 +57,6 @@ export default class TripController {
         this._renderDays(tripEvents);
         break;
     }
-  }
-
-  onEventChange(event, updatedEvent) {
-    const index = this._events.findIndex((currentEvent) => currentEvent === event);
-
-    this._events[index] = updatedEvent;
   }
 
   init() {

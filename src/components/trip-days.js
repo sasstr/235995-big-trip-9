@@ -37,7 +37,7 @@ export default class TripDays extends AbstractComponent {
     }
     return this._element;
   }
-  
+
   getTemplate() {
     return `<ul class="trip-days">
 

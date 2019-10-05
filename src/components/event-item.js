@@ -63,6 +63,12 @@ export default class EventItem extends AbstractComponent {
       .addEventListener(`click`, () => {
         const eventEdit = new EventEdit(this._event);
 
+        /* flatpickr(this.eventEdit.getElement().querySelector(`.`), {
+          altInput: true,
+          allowInput: true,
+          defaultDate: this._eventTime.start,  //  this._eventTime.end
+        }); */
+
         const onEscKeyDown = (evt) => {
           if (evt.key === `Escape` || evt.key === `Esc`) {
             eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
@@ -106,17 +112,28 @@ export default class EventItem extends AbstractComponent {
               event-offer-comfort
               event-favorite checked ?
             */
+            // Получаем данные которые внес пользователь.
             const formData = new FormData(eventEdit.getElement());
+
+            // Обновляем поля объекта, которые внес пользователь.
             const updatedEvent = Object.assign({}, this._event, {
               eventCity: formData.get(`event-destination`),
               eventPrice: formData.get(`event-price`),
-              [this._eventTime.start]: formData.get(`event-start-time`),
-              [this._eventTime.end]: formData.get(`event-end-time`)
+              eventTime: {
+                start: Date.parse(new Date(formData.get(`event-start-time`))),
+                end: Date.parse(new Date(formData.get(`event-end-time`))),
+                duration: this._eventTime.end - this._eventTime.start
+              },
+              isFavorite: !!formData.get(`event-favorite`),
             });
 
+            // Обновляем данные
             this._onEventChange(this._event, updatedEvent);
 
+            // Получаем обновленный объект Event
             const updatedEventItem = new EventItem(updatedEvent, this._onEventChange);
+
+            // Вносим обновленные данные в DOM.
             eventEdit.getElement().parentNode.replaceChild(updatedEventItem.getElement(), eventEdit.getElement());
           });
 

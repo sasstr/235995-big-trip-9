@@ -1,9 +1,9 @@
 import EventItem from '../components/event-item';
 
 export default class EventController {
-  constructor(event, onDataChange, onChangeView) {
+  constructor(event, onEventChange, onChangeView) {
     this._event = event;
-    this._onDataChange = onDataChange;
+    this._onEventChange = onEventChange;
     this._onChangeView = onChangeView;
   }
 
