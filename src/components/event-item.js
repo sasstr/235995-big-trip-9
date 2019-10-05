@@ -1,22 +1,21 @@
 import {formatTime} from './util';
 import AbstractComponent from './abstract-component';
+import EventEdit from './event-edit';
 
 export default class EventItem extends AbstractComponent {
-  constructor({activityEvent,
-    eventType,
-    eventTime,
-    eventPrice,
-    eventCity,
-    offerList,
-  }) {
+  constructor(event, onEventChange) {
     super();
 
-    this._activityEvent = activityEvent;
-    this._eventType = eventType;
-    this._eventTime = eventTime;
-    this._eventPrice = eventPrice;
-    this._eventCity = eventCity;
-    this._offerList = offerList;
+    this._event = event;
+    this._activityEvent = event.activityEvent;
+    this._eventType = event.eventType;
+    this._eventTime = event.eventTime;
+    this._eventPrice = event.eventPrice;
+    this._eventCity = event.eventCity;
+    this._offerList = event.offerList;
+
+    this._onEventChange = onEventChange;
+    this.init();
   }
 
   getTemplate() {
@@ -55,5 +54,77 @@ export default class EventItem extends AbstractComponent {
     </button>
   </div>
   </li>`.trim();
+  }
+
+  init() {
+    const event = this;
+    event.getElement()
+      .querySelector(`.event__rollup-btn`)
+      .addEventListener(`click`, () => {
+        const eventEdit = new EventEdit(this._event);
+
+        const onEscKeyDown = (evt) => {
+          if (evt.key === `Escape` || evt.key === `Esc`) {
+            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
+            document.removeEventListener(`keydown`, onEscKeyDown);
+          }
+        };
+
+        event.getElement().parentNode.replaceChild(eventEdit.getElement(), event.getElement());
+        document.addEventListener(`keydown`, onEscKeyDown);
+
+        eventEdit.getElement().querySelectorAll(`.event__input`)
+          .forEach((item) => {
+            item.addEventListener(`focus`, () => {
+              document.removeEventListener(`keydown`, onEscKeyDown);
+            });
+          });
+
+        eventEdit.getElement().querySelectorAll(`.event__input`)
+          .forEach((item) => {
+            item.addEventListener(`blur`, () => {
+              document.addEventListener(`keydown`, onEscKeyDown);
+            });
+          });
+
+        eventEdit.getElement()
+          .querySelector(`.event__rollup-btn`)
+          .addEventListener(`click`, () => {
+            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
+            document.removeEventListener(`keydown`, onEscKeyDown);
+          });
+
+        eventEdit.getElement()
+          .addEventListener(`submit`, (evt) => {
+            evt.preventDefault();
+
+            /* .event__save-btn
+              event-destination +
+              event-start-time  +
+              event-end-time    +
+              event-price       +
+              event-offer-comfort
+              event-favorite checked ?
+            */
+            const formData = new FormData(eventEdit.getElement());
+            const updatedEvent = Object.assign({}, this._event, {
+              eventCity: formData.get(`event-destination`),
+              eventPrice: formData.get(`event-price`),
+              [this._eventTime.start]: formData.get(`event-start-time`),
+              [this._eventTime.end]: formData.get(`event-end-time`)
+            });
+
+            this._onEventChange(this._event, updatedEvent);
+
+            const updatedEventItem = new EventItem(updatedEvent, this._onEventChange);
+            eventEdit.getElement().parentNode.replaceChild(updatedEventItem.getElement(), eventEdit.getElement());
+          });
+
+        eventEdit.getElement()
+          .addEventListener(`reset`, (evt) => {
+            evt.preventDefault();
+          });
+      });
+
   }
 }

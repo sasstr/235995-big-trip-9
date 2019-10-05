@@ -1,64 +1,19 @@
 import AbstractComponent from './abstract-component';
 import {createElement} from './util';
-import EventItem from './event-item';
-import EventEdit from './event-edit';
 import Day from './day';
+import EventController from '../controllers/event-controller';
+
 export default class TripDays extends AbstractComponent {
-  constructor(days) {
+  constructor(days, onEventChange) {
     super();
 
     this._days = days;
+    this._onEventChange = onEventChange;
   }
 
-  static _makeEvent(eventMock) {
-
-    const event = new EventItem(eventMock);
-
-    event.getElement()
-      .querySelector(`.event__rollup-btn`)
-      .addEventListener(`click`, () => {
-        const eventEdit = new EventEdit(eventMock);
-
-        const onEscKeyDown = (evt) => {
-          if (evt.key === `Escape` || evt.key === `Esc`) {
-            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
-            document.removeEventListener(`keydown`, onEscKeyDown);
-          }
-        };
-
-        event.getElement().parentNode.replaceChild(eventEdit.getElement(), event.getElement());
-        document.addEventListener(`keydown`, onEscKeyDown);
-
-        eventEdit.getElement().querySelectorAll(`.event__input`)
-        .forEach((item) => {
-          item.addEventListener(`focus`, () => {
-            document.removeEventListener(`keydown`, onEscKeyDown);
-          });
-        });
-
-        eventEdit.getElement().querySelectorAll(`.event__input`)
-          .forEach((item) => {
-            item.addEventListener(`blur`, () => {
-              document.addEventListener(`keydown`, onEscKeyDown);
-            });
-          });
-
-        eventEdit.getElement()
-        .querySelector(`.event__rollup-btn`)
-        .addEventListener(`click`, () => {
-          eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
-          document.removeEventListener(`keydown`, onEscKeyDown);
-        });
-
-        eventEdit.getElement()
-        .querySelector(`.event__save-btn`)
-        .addEventListener(`submit`, () => {
-          eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
-          document.addEventListener(`keydown`, onEscKeyDown);
-        });
-      });
-
-    return event;
+  static _makeEvent(eventData, onEventChange) {
+    const event = new EventController(eventData, onEventChange);
+    return event.create();
   }
 
   _makeDay(dayInfo, index) {
@@ -67,7 +22,7 @@ export default class TripDays extends AbstractComponent {
     const tripEventsList = createElement(`<ul class="trip-events__list">
 
     </ul>`);
-    dayInfo[1].forEach((eventInfo) => tripEventsList.appendChild(TripDays._makeEvent(eventInfo, tripEventsList).getElement()));
+    dayInfo[1].forEach((eventInfo) => tripEventsList.appendChild(TripDays._makeEvent(eventInfo, this._onEventChange).getElement()));
     dayElement.append(tripEventsList);
 
     return dayElement;
@@ -82,6 +37,7 @@ export default class TripDays extends AbstractComponent {
     }
     return this._element;
   }
+  
   getTemplate() {
     return `<ul class="trip-days">
 
