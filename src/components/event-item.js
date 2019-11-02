@@ -18,6 +18,13 @@ export default class EventItem extends AbstractComponent {
     this.init();
   }
 
+  _setDefaultView(container, pointEdit, pointView) {
+    if (container.getElement().parentNode.contains(pointEdit.getElement())) {
+      container.getElement()
+      .replaceChild(pointView.getElement(), pointEdit.getElement());
+    }
+  }
+
   getTemplate() {
     return `<li class="trip-events__item">
     <div class="event">
@@ -28,9 +35,13 @@ export default class EventItem extends AbstractComponent {
 
     <div class="event__schedule">
       <p class="event__time">
-        <time class="event__start-time" datetime="${new Date(this._eventTime.start).toISOString().slice(0, 17)}">${new Date(this._eventTime.start).toISOString().slice(11, 16)}</time>
+        <time class="event__start-time"
+        datetime="${new Date(this._eventTime.start).toISOString().slice(0, 17)}">
+        ${new Date(this._eventTime.start).toISOString().slice(11, 16)}</time>
         &mdash;
-        <time class="event__end-time" datetime="${new Date(this._eventTime.start).toISOString().slice(0, 17)}">${new Date(this._eventTime.end).toISOString().slice(11, 16)}</time>
+        <time class="event__end-time"
+        datetime="${new Date(this._eventTime.start).toISOString().slice(0, 17)}">
+        ${new Date(this._eventTime.end).toISOString().slice(11, 16)}</time>
       </p>
       <p class="event__duration">${formatTime(this._eventTime.duration)}</p>
     </div>
@@ -71,12 +82,14 @@ export default class EventItem extends AbstractComponent {
 
         const onEscKeyDown = (evt) => {
           if (evt.key === `Escape` || evt.key === `Esc`) {
-            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
+            eventEdit.getElement().parentNode
+            .replaceChild(event.getElement(), eventEdit.getElement());
             document.removeEventListener(`keydown`, onEscKeyDown);
           }
         };
 
-        event.getElement().parentNode.replaceChild(eventEdit.getElement(), event.getElement());
+        event.getElement().parentNode
+        .replaceChild(eventEdit.getElement(), event.getElement());
         document.addEventListener(`keydown`, onEscKeyDown);
 
         eventEdit.getElement().querySelectorAll(`.event__input`)
@@ -96,7 +109,8 @@ export default class EventItem extends AbstractComponent {
         eventEdit.getElement()
           .querySelector(`.event__rollup-btn`)
           .addEventListener(`click`, () => {
-            eventEdit.getElement().parentNode.replaceChild(event.getElement(), eventEdit.getElement());
+            this._setDefaultView(event.getElement().parentNode, eventEdit, event);
+            eventEdit.getElement().replaceChild(event.getElement(), eventEdit.getElement());
             document.removeEventListener(`keydown`, onEscKeyDown);
           });
 
@@ -120,8 +134,8 @@ export default class EventItem extends AbstractComponent {
               eventCity: formData.get(`event-destination`),
               eventPrice: formData.get(`event-price`),
               eventTime: {
-                start: Date.parse(new Date(formData.get(`event-start-time`))),
-                end: Date.parse(new Date(formData.get(`event-end-time`))),
+                start: Date.UTC(new Date(formData.get(`event-start-time`))),
+                end: Date.UTC(new Date(formData.get(`event-end-time`))),
                 duration: this._eventTime.end - this._eventTime.start
               },
               isFavorite: !!formData.get(`event-favorite`),

@@ -8,6 +8,12 @@ export default class TripController {
     this._container = container;
     this._events = events.slice();
     this._sort = new Sort();
+    this._subscriptions = [];
+    this._onChangeView = this._onChangeView.bind(this);
+  }
+
+  _onChangeView() {
+    this._subscriptions.forEach((it) => it());
   }
 
   _sortByTime() {
